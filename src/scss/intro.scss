@@ -1,0 +1,302 @@
+html, body {
+    margin: 0;
+    padding: 0;
+
+    background: #000;
+
+    font-family: sans-serif;
+}
+
+.main-heading {
+    color: white;
+    text-transform: uppercase;
+}
+
+/* GAME INTERACT */
+.game-container {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-content {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.home-container {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+    .logo-page {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(100deg,#EF7014 39%,#EF4314 39.01%, #EF4314 49.49%, #DD2B14 49.51%, #DD2B14 65%, transparent 65.1%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-position:50% 50%;
+        background-size: 400% 400%;
+        &.remove-back {
+            animation: backgroundAnim 1s ease-out forwards;
+            @keyframes backgroundAnim {
+                from {background-position:50% 50%;}
+                to {background-position:100% 50%;}
+            }
+        }
+        .remove-item {
+            animation: removeItem 1s ease-out forwards;
+            @keyframes removeItem {
+                0% {transform: scale(1);}
+                30% {transform: scale(1.2);}
+                80% {transform: scale(0);}
+                100% {transform: scale(0);}
+            }
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            right: 35%;
+            transform: skewX(-10deg);
+            height: 100%;
+            width: 100%;
+            right:-150%;
+            background: linear-gradient(90deg,#EF7014 0%,#EF7014 10%, #EF4314 10.1%,  #EF4314 20%, #DD2B14 20.1%, #DD2B14 60%,#EF4314 60.1%,#EF4314 70%,#EF7014 70.1%, #EF7014 100%);
+            animation: backLine 3s ease-out forwards;
+            animation-delay: 2s;
+            @keyframes backLine {
+                0% {transform: translateX(0) skewX(-10deg)}
+                100% {transform: translateX(-400%) skewX(-10deg)}
+                // 0% {transform: translateX(0) skewX(-10deg);width: 0px;}
+                // 50% {transform: translateX(-200%) skewX(-10deg);width: 400px;}
+                // 100% {transform: translateX(-400%) skewX(-10deg);width: 0px;}
+            }
+        }
+        .logo-container {
+            height: 50vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            &.logo-bounce {
+                animation: logoBounce 5s ease-out infinite;
+                @keyframes logoBounce {
+                    from {transform: scale(1);}
+                    50% {transform: scale(1.1);}
+                    to {transform: scale(1);}
+                }
+            }
+            img {
+                opacity: 0;
+                height: 100%;
+                animation: logoAppear 1s ease-in-out forwards;
+                animation-delay: 2s;
+            }
+            @keyframes logoAppear {
+                from {height: 40%;opacity: 0;}
+                20% {height: 150%;opacity: 1;}
+                40% {height: 70%;}
+                60% {height: 120%;}
+                80% {height: 80%;}
+                100% {height: 100%;opacity: 1;}
+            }
+        }
+        .play-btn {
+            height: 40px;
+            width: 200px;
+            background: #1D9EFF;
+            color: #FFF;
+            border: 5px solid #3232CE;
+            box-shadow: 20px 20px 1px #3232CE;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 5vh;
+            cursor: pointer;
+            &:before {
+                content: '';
+                position: absolute;
+                bottom: 16px;
+                right: -9px;
+                width: 6px;
+                height: 20px;
+                background: #3232CE;
+                transform: skewX(45deg);
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: -20px;
+                left: 15px;
+                width: 190px;
+                height: 20px;
+                background: #3232CE;
+                transform: skewX(45deg);
+            }
+        }
+        .info-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 2%;
+            right: 2%;
+            height: 50px;
+            width: 50px;
+            background: #1D9EFF;
+            border-radius: 50%;
+            border: 5px solid #3232CE;
+            box-shadow: 8px 4px 1px #3232CE;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sound-btn {
+            cursor: pointer;
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            height: 50px;
+            width: 50px;
+            background: #1D9EFF;
+            border-radius: 50%;
+            border: 5px solid #3232CE;
+            box-shadow: 8px 4px 1px #3232CE;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .instruct-page {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .card {
+            height: 500px;
+            width: 30%;
+            max-width: 350px;
+            border: 5px solid #000;
+            box-shadow: 8px 14px 1px #000;
+            background: #fff;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all .5s;
+            position: relative;
+            overflow: hidden;
+            &.appear-card {
+                animation: appearCard 1s ease-out forwards;
+                @keyframes appearCard {
+                    from{transform: scale(0);}
+                    to{transform: scale(1);}
+                }
+            }
+            p {
+                z-index: 1;
+            }
+            .touch-pad {
+                z-index: 1;
+                display: flex;
+                width: 200px;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                .touch {
+                    width: 50px;
+                    height: 50px;
+                    background: #1D9EFF;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 5px solid #3232CE;
+                    border-radius: 8px;
+                    box-shadow: 4px 7px 1px #3232CE;
+                    color: #fff;
+                }
+                .first-touch {
+                    margin: 0px 50px 10px 50px;
+                }
+            }
+            .player-txt {
+                margin-top: 20px;
+                color: #BCBCBC;
+                text-align: center;
+                z-index: 1;
+                p {
+                    margin-bottom: 0px;
+                }
+                .ready-txt {
+                    margin-top: 2px;
+                    font-size: 30px;
+                }
+            }
+            &.ready-player {
+                transition: all .5s;
+                position: relative;
+                p {
+                    color: #BCBCBC;
+                }
+                .touch {
+                    border-color: #000;
+                    color: #000;
+                    background: #FFF;
+                    box-shadow: 4px 7px 1px #000;
+                }
+                .player-txt {
+                    p {
+                        color: #000;
+                    }
+                }
+                &.player-1 {
+                    &:before {
+                        background: #FFA41D;
+                        animation: loadCard .25s ease-out forwards;
+                    }
+                }
+                &.player-2 {
+                    &:before {
+                        background: #2D9DE7;
+                        animation: loadCard .25s ease-out forwards;
+                    }
+                }
+                &.player-3 {
+                    &:before {
+                        background: #3ADD4A;
+                        animation: loadCard .25s ease-out forwards;
+                    }
+                }
+                &.player-4 {
+                    &:before {
+                        background: #A852FF;
+                        animation: loadCard .25s ease-out forwards;
+                    }
+                }
+            }
+            &:before {
+                content: '';
+                position: absolute;
+                height: 0px;
+                width: 100%;
+                bottom: 0px;
+                background: palevioletred;
+                z-index: 0;
+            }
+            @keyframes loadCard {
+                from {height: 0px;}
+                to {height: 500px;}
+            }
+        }
+    }
+}

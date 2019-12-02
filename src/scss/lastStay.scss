@@ -1,0 +1,176 @@
+.last-stay {
+    .instruction {
+        height: auto;
+        width: auto;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        p {
+            text-align: center;
+        }
+        // .press-txt{
+        //     display: flex;
+        //     justify-content: space-around;
+        //     align-items: center;
+        //     width: 100%;
+        //     font-size: 3em;
+        //     color: #fff;
+        //     text-transform: uppercase;
+        //     text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+        // }
+    }
+    .players-container {
+        height: calc(100vh - (50vh));
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        .player-cont {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            .container-circle {
+                 height: 50px;
+                width: 200px;   
+                border: 4px solid #000;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom: #fff;
+                background: #fff;
+                overflow: hidden;
+                position: relative;
+                .player-txt {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin: 2px 0 0 0;
+                    transform: translate(-50%, -50%);
+                    font-size: 16px;
+                    color: #fff;
+                    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+                }
+                .circle{
+                    height: 30px;
+                    width: 30px;
+                    transition: all .2s;
+                    background: purple;
+                    border-radius: 100%;
+                }
+                .full-circle {
+                    height: 200px;
+                    width: 200px;
+                    background: green;
+                }
+            }
+        }
+        .player-1 {
+            .container-circle {
+                border-color: #FFC03F;
+            }
+        }
+        .player-2 {
+            .container-circle {
+                border-color: #2D9DE7;
+            }
+        }
+        .player-3 {
+            .container-circle {
+                border-color: #3ADD4A;
+            }
+        }
+        .player-4 {
+            .container-circle {
+                border-color: #A852FF;
+            }
+        }
+    }
+    .touch-pad {
+        z-index: 1;
+        display: flex;
+        width: 300px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .touch {
+            width: 70px;
+            height: 70px;
+            background: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid #000;
+            border-radius: 8px;
+            box-shadow: 4px 7px 1px #000;
+            color: #000;
+            position: relative;
+        }
+        .first-touch {
+            margin: 0px 100px 10px 100px;
+        }
+        .haut-touch {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 0; 
+                height: 0; 
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-bottom: 25px solid #000;
+            }
+        }
+        .gauche-touch {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 0; 
+                height: 0; 
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent; 
+                border-right: 25px solid #000; 
+            }
+        }
+        .bas-touch {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 0; 
+                height: 0; 
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 25px solid #000;
+            }
+        }
+        .droite-touch {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 0; 
+                height: 0; 
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 25px solid #000;
+            }
+        }
+        .active-touch {
+            background: #1D9EFF;
+            &:before {
+                filter:invert(1);
+            }
+        }
+    }
+}
