@@ -1,0 +1,79 @@
+.transition-round {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    .bandeau {
+        position: absolute;
+        height: 100%;
+        width: 400px;
+        background: #DD2B14;
+        transform: skewX(-10deg);
+        right: -50%;
+        border-left: 10px solid #EF7014;
+        border-right: 100px solid #EF7014;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        animation: translateBandeau 5s ease-out forwards;
+        @keyframes translateBandeau {
+            from {right:-50%;
+                border-right: 130px solid #EF7014;}
+            30% {right:15%;        
+                border-left: 170px solid #EF7014;
+                border-right: 30px solid #EF7014;}
+            70%{right: 30%; 
+                border-left: 20px solid #EF7014;
+                border-right: 250px solid #EF7014;}
+            80% {
+                border-right: 0px solid #EF7014;
+            }
+            to {right:150%;}
+        }
+        .time-txt {
+            font-size: 1em;
+            font-family: 'hudson';
+        }
+        .play-txt {
+            font-size: 4em;
+            font-family: 'kensmark';
+        }
+        .numbers {
+            height: 200px;
+            width: 200px;
+            position: relative;
+            font-family: 'kensmark';
+            .number-txt {
+                font-size: 10em;
+                position: absolute;
+                top: 20px;
+                left: 60px;
+                &.number-1 {
+                    opacity: 0;
+                    animation: numbersAppear 1s ease-out forwards;
+                    animation-delay: 3s;
+                }
+                &.number-2 {
+                    opacity: 0;
+                    animation: numbersAppear 1s ease-out forwards;
+                    animation-delay: 2s;
+                }
+                &.number-3 {
+                    opacity: 0;
+                    animation: numbersAppear 1s ease-out forwards;
+                    animation-delay: 1s;
+                }
+                @keyframes numbersAppear {
+                    from {opacity: 0;transform: scale(0);}
+                    20% {opacity: 1;transform: scale(1);}
+                    50% {opacity: 1;transform: scale(1);}
+                    80% {opacity: 1;transform: scale(1);}
+                    to {opacity: 0;transform: scale(0);}
+                }
+            }
+        }
+    }
+}

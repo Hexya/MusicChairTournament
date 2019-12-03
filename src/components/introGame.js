@@ -2,8 +2,14 @@ import imgLogo from '../assets/img/LOGO_MCT.svg';
 import imgInfo from '../assets/img/InfosSvg.svg';
 import imgSound from '../assets/img/SoundSvg.svg';
 
+import soundAcceuil from '../audios/accueil.mp3';
+import soundPlay from '../audios/play.mp3';
+import soundRdy from '../audios/ready.mp3';
+
 let logoPage = require('../Templates/logoPage.tpl');
 let instructPage = require('../Templates/instructPage.tpl');
+
+import { Howl, Howler } from 'howler';
 
 export default class App {
 	constructor() {
@@ -20,10 +26,20 @@ export default class App {
 		document.querySelector('.logo-img').src = imgLogo;
 		document.querySelector('.info-btn img').src = imgInfo;
 		document.querySelector('.sound-btn img').src = imgSound;
+
+		this.homeSound = new Howl({
+			src: [soundAcceuil]
+		});
+
+		this.homeSound.play();
 	}
 	beginGame() {
 		return new Promise(resolve => {
 			document.querySelector('.play-btn').addEventListener('click', () => {
+				let playSound = new Howl({
+					src: [soundPlay]
+				});
+				playSound.play();
 				document.querySelector('.logo-container').classList.remove('logo-bounce');
 				document.querySelector('.logo-container').classList.add('remove-item');
 				document.querySelector('.play-btn').classList.add('remove-item');
@@ -50,15 +66,39 @@ export default class App {
 				let keyCode = e.keyCode || e.which;
 				if (keyCode == 90 || keyCode == 68 || keyCode == 83 || keyCode == 81) {
 					document.querySelector('.player-1').classList.add('ready-player');
+					if (document.querySelector('.home-container')) {
+						let rdy = new Howl({
+							src: [soundRdy]
+						});
+						rdy.play();
+					}
 				}
 				if (keyCode == 79 || keyCode == 77 || keyCode == 76 || keyCode == 75) {
 					document.querySelector('.player-2').classList.add('ready-player');
+					if (document.querySelector('.home-container')) {
+						let rdy = new Howl({
+							src: [soundRdy]
+						});
+						rdy.play();
+					}
 				}
 				if (keyCode == 38 || keyCode == 39 || keyCode == 40 || keyCode == 37) {
 					document.querySelector('.player-3').classList.add('ready-player');
+					if (document.querySelector('.home-container')) {
+						let rdy = new Howl({
+							src: [soundRdy]
+						});
+						rdy.play();
+					}
 				}
 				if (keyCode == 53 || keyCode == 51 || keyCode == 50 || keyCode == 49) {
 					document.querySelector('.player-4').classList.add('ready-player');
+					if (document.querySelector('.home-container')) {
+						let rdy = new Howl({
+							src: [soundRdy]
+						});
+						rdy.play();
+					}
 				}
 				//REMOVE CARD
 				setTimeout(() => {
@@ -74,6 +114,7 @@ export default class App {
 									document.querySelector('.player-3').classList.add('remove-item');
 									setTimeout(() => {
 										document.querySelector('.player-4').classList.add('remove-item');
+										this.homeSound.stop();
 										resolve(true);
 									}, 200);
 								}, 200);

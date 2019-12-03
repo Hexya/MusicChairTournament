@@ -1,4 +1,4 @@
-.progress-bar {
+.bar-evo  {
     .instruction {
         height: auto;
         width: auto;
@@ -8,6 +8,7 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+        margin-top: 10vh;
         p {
             text-align: center;
         }
@@ -20,6 +21,17 @@
             color: #000;
             font-weight: bold;
             text-transform: uppercase;
+            flex-direction: column;
+            .final-txt {
+                font-family: 'hudson';
+                font-size: 3em;
+                margin-bottom: 0px;
+            }
+            .round-txt {
+                font-family: 'kensmark';
+                font-size: 6em;
+                margin-bottom: 0px;
+            }
         }
     }
     .bar-final-cont {
@@ -27,6 +39,15 @@
         bottom: 20vh;
         left: 50%;
         transform: translateX(-50%);
+        &.appear-bar {
+            transition: all .5s;
+            opacity: 0;
+            animation: appearBar .5s ease-out forwards;
+            @keyframes appearBar {
+                from{opacity: 0;}
+                to{ opacity: 1;}
+            }
+        }
         .bar {
             height: 50px;
             width: 700px;
@@ -37,17 +58,28 @@
             box-shadow: 4px 7px 1px #000;
             border-radius: 100px;
             border:5px solid #000;
-            overflow: hidden;
             .progress {
                 height: 50px;
                 width: 350px;
-                transition: width .15s;
+                transition: width .25s;
               }
               .progress-left {
                 background: #F0AE57;
+                border-bottom-left-radius: 25px;
+                border-top-left-radius: 25px;
+                position: relative;
+                img {
+                    position: absolute;
+                    height: 150px;
+                    width: auto;
+                    right: -90px;
+                    top: -50px;
+                }
               }
               .progress-right {
                 background: #B758F1;
+                border-bottom-right-radius: 25px;
+                border-top-right-radius: 25px;
               }
           }
     }
@@ -203,4 +235,13 @@
             }
         }
     } 
+}
+.kamehameha .players-container .player-cont .container-bar {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    .player-txt {
+        color: #fff;
+        font-size: 1.2em;
+    }
 }

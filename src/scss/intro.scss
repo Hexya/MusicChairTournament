@@ -37,18 +37,21 @@ html, body {
     .logo-page {
         height: 100vh;
         width: 100%;
-        background: linear-gradient(100deg,#EF7014 39%,#EF4314 39.01%, #EF4314 49.49%, #DD2B14 49.51%, #DD2B14 65%, transparent 65.1%);
+        background: linear-gradient(100deg,#EF4314 39%,#EF4314 39.01%, #EF4314 49.49%, #DD2B14 49.51%, #DD2B14 65%, transparent 65.1%);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-position:50% 50%;
         background-size: 400% 400%;
+        width: calc(100% - 100px);
+        height: calc(100vh - 100px);
+        border: 50px solid #fff;
         &.remove-back {
             animation: backgroundAnim 1s ease-out forwards;
             @keyframes backgroundAnim {
-                from {background-position:50% 50%;}
-                to {background-position:100% 50%;}
+                from {background-position:50% 50%;border-color: #fff;}
+                to {background-position:100% 50%;border-color: transparent;}
             }
         }
         .remove-item {
@@ -65,7 +68,8 @@ html, body {
             position: absolute;
             right: 35%;
             transform: skewX(-10deg);
-            height: 100%;
+            top: 50px;
+            height: calc(100% - 100px);
             width: 100%;
             right:-150%;
             background: linear-gradient(90deg,#EF7014 0%,#EF7014 10%, #EF4314 10.1%,  #EF4314 20%, #DD2B14 20.1%, #DD2B14 60%,#EF4314 60.1%,#EF4314 70%,#EF7014 70.1%, #EF7014 100%);
@@ -78,6 +82,11 @@ html, body {
                 // 50% {transform: translateX(-200%) skewX(-10deg);width: 400px;}
                 // 100% {transform: translateX(-400%) skewX(-10deg);width: 0px;}
             }
+        }
+        .txt-intro {
+            color: #fff;
+            text-align: center;
+            margin-top: 7vh;
         }
         .logo-container {
             height: 50vh;
@@ -119,7 +128,7 @@ html, body {
             justify-content: center;
             align-items: center;
             position: relative;
-            margin-top: 5vh;
+            margin-top: 7vh;
             cursor: pointer;
             margin-right: 20px;
             &:before {

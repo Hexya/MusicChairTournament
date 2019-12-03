@@ -2,8 +2,13 @@ let uniqueKey = require('../Templates/uniqueKey.tpl');
 let progressBar = require('../Templates/progressBar.tpl');
 let kamehameha = require('../Templates/kamehameha.tpl');
 let lastStay = require('../Templates/lastStay.tpl');
+let transitionTpl = require('../Templates/transitionTpl.tpl');
+
 
 import imgValidate from '../assets/img/Check.svg';
+import strikeBar from '../assets/img/CursorSvg.svg';
+
+import { Howl, Howler } from 'howler';
 
 export default class App {
 	constructor(numberGame) {
@@ -20,6 +25,7 @@ export default class App {
 
 		this.winner = ['player-1', 'player-2', 'player-3', 'player-4'];
 		this.incre = 1;
+		this.increment = 1;
 
 		// this.gameArray[numberGame]();
 		//this.randomGame();
@@ -72,97 +78,99 @@ export default class App {
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				let keyCode = e.keyCode || e.which;
-				switch (randomArray[rand]) {
-					case 'haut':
-						if (keyCode == 90) {
-							//Z
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 79) {
-							//O
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 38) {
-							//^
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 53) {
-							//5
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'droite':
-						if (keyCode == 68) {
-							//D
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 77) {
-							//M
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 39) {
-							//>
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 51) {
-							//3
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'bas':
-						if (keyCode == 83) {
-							//S
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 76) {
-							//L
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 40) {
-							//v
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 50) {
-							//2
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'gauche':
-						if (keyCode == 81) {
-							//Q
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 75) {
-							//K
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 37) {
-							//<
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 49) {
-							//1
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					default:
+				if (document.querySelector('.unique-key')) {
+					let keyCode = e.keyCode || e.which;
+					switch (randomArray[rand]) {
+						case 'haut':
+							if (keyCode == 90) {
+								//Z
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 79) {
+								//O
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 38) {
+								//^
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 53) {
+								//5
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'droite':
+							if (keyCode == 68) {
+								//D
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 77) {
+								//M
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 39) {
+								//>
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 51) {
+								//3
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'bas':
+							if (keyCode == 83) {
+								//S
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 76) {
+								//L
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 40) {
+								//v
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 50) {
+								//2
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'gauche':
+							if (keyCode == 81) {
+								//Q
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 75) {
+								//K
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 37) {
+								//<
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 49) {
+								//1
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -204,41 +212,43 @@ export default class App {
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				let key = e.keyCode || e.which;
-				switch (key) {
-					case 81: //Q P1
-						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 3);
-						break;
-					case 68: //D P1
-						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 3);
-						break;
-					case 75: //K P2
-						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 3);
-						break;
-					case 77: //M P2
-						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 3);
-						break;
-					case 37: //left walk P3
-						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 3);
-						break;
-					case 39: //right turn P3
-						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 3);
-						break;
-					case 49: //1 P4
-						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 3);
-						break;
-					case 51: //3 P4
-						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 3);
-						break;
-					default:
+				if (document.querySelector('.progress-bar')) {
+					let key = e.keyCode || e.which;
+					switch (key) {
+						case 81: //Q P1
+							this.incrementProgressBar('player-1');
+							this.isFinish(resolve, 3);
+							break;
+						case 68: //D P1
+							this.incrementProgressBar('player-1');
+							this.isFinish(resolve, 3);
+							break;
+						case 75: //K P2
+							this.incrementProgressBar('player-2');
+							this.isFinish(resolve, 3);
+							break;
+						case 77: //M P2
+							this.incrementProgressBar('player-2');
+							this.isFinish(resolve, 3);
+							break;
+						case 37: //left walk P3
+							this.incrementProgressBar('player-3');
+							this.isFinish(resolve, 3);
+							break;
+						case 39: //right turn P3
+							this.incrementProgressBar('player-3');
+							this.isFinish(resolve, 3);
+							break;
+						case 49: //1 P4
+							this.incrementProgressBar('player-4');
+							this.isFinish(resolve, 3);
+							break;
+						case 51: //3 P4
+							this.incrementProgressBar('player-4');
+							this.isFinish(resolve, 3);
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -267,18 +277,22 @@ export default class App {
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
 
+		document.querySelector('.game-container .progress-left img').src = strikeBar;
+
+		this.transitionRound();
+
 		//Check player
-		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
+		for (let i = 0; i < document.querySelectorAll('.player-final').length; i++) {
 			if (
 				this.winnerArray[0] !=
-					document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
-				this.winnerArray[1] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1]
+				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
+				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
 				console.log(document.querySelectorAll('.player-cont')[i]);
-				document.querySelectorAll('.player-cont')[i].style.display = 'none';
+				document.querySelectorAll('.player-final')[i].style.display = 'none';
 			} else {
-				document.querySelectorAll('.player-cont')[i].classList.add('winner-' + this.incre);
-				this.incre += 1;
+				document.querySelectorAll('.player-final')[i].classList.add('winner-' + this.increment);
+				this.increment += 1;
 			}
 		}
 
@@ -289,48 +303,59 @@ export default class App {
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				if (
-					document.querySelector('.progress-right').offsetWidth < 30 ||
-					document.querySelector('.progress-right').offsetWidth > 670
-				) {
-					// this.isFinish(resolve, 2);
-				}
+				console.log('ehhehe')
+				if (document.querySelector('.kamehameha')) {
+					if (
+						document.querySelector('.progress-right').offsetWidth < 30 ||
+						document.querySelector('.progress-right').offsetWidth > 670
+					) {
+						// this.isFinish(resolve, 2);
+					}
 
-				let key = e.keyCode || e.which;
-				switch (key) {
-					case 81: //Q P1
-						this.progressKamehameha('player-1');
-						this.isFinish(resolve, 2);
-						break;
-					case 68: //D P1
-						this.progressKamehameha('player-1');
-						this.isFinish(resolve, 2);
-						break;
-					case 75: //K P2
-						this.progressKamehameha('player-2');
-						this.isFinish(resolve, 2);
-						break;
-					case 77: //M P2
-						this.progressKamehameha('player-2');
-						this.isFinish(resolve, 2);
-						break;
-					case 37: //left walk P3
-						this.progressKamehameha('player-3');
-						this.isFinish(resolve, 2);
-						break;
-					case 39: //right turn P3
-						this.progressKamehameha('player-3');
-						this.isFinish(resolve, 2);
-						break;
-					case 49: //1 P4
-						this.progressKamehameha('player-4');
-						this.isFinish(resolve, 2);
-						break;
-					case 51: //3 P4
-						this.progressKamehameha('player-4');
-						this.isFinish(resolve, 2);
-						break;
-					default:
+					let key = e.keyCode || e.which;
+					switch (key) {
+						case 81: //Q P1
+							console.log('jejejeje')
+							this.progressKamehameha('player-1');
+							this.isFinish(resolve, 2);
+							break;
+						case 68: //D P1
+							console.log('jejejeje')
+							this.progressKamehameha('player-1');
+							this.isFinish(resolve, 2);
+							break;
+						case 75: //K P2
+							console.log('jejejeje')
+							this.progressKamehameha('player-2');
+							this.isFinish(resolve, 2);
+							break;
+						case 77: //M P2
+							console.log('jejejeje')
+							this.progressKamehameha('player-2');
+							this.isFinish(resolve, 2);
+							break;
+						case 37: //left walk P3
+							console.log('jejejeje')
+							this.progressKamehameha('player-3');
+							this.isFinish(resolve, 2);
+							break;
+						case 39: //right turn P3
+							console.log('jejejeje')
+							this.progressKamehameha('player-3');
+							this.isFinish(resolve, 2);
+							break;
+						case 49: //1 P4
+							console.log('jejejeje')
+							this.progressKamehameha('player-4');
+							this.isFinish(resolve, 2);
+							break;
+						case 51: //3 P4
+							console.log('jejejeje')
+							this.progressKamehameha('player-4');
+							this.isFinish(resolve, 2);
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -510,6 +535,11 @@ export default class App {
 				});
 			}
 		});
+	}
+
+	transitionRound() {
+		console.log('round');
+		document.querySelector('.game-container').innerHTML += transitionTpl;
 	}
 
 	// Method for remove ui
