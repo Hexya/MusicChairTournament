@@ -63,14 +63,14 @@ class Scene01 extends SceneManager {
 		this.game = new interactGame();
 
 		//Start game INTRO GAME
-		/*new introGame().then(() => {
+		new introGame().then(() => {
 			this.sound.play();
 
 			setTimeout(() => {
 				//
 				this.sound.stop();
 
-				this.game.uniqueKey().then(looser => {
+				this.game.progressBar().then(looser => {
 					this.characters.stoppedCharacters();
 
 					setTimeout(() => {
@@ -94,24 +94,24 @@ class Scene01 extends SceneManager {
 					}, 1500);
 				});
 			}, 2500);
-		});*/
+		});
 
-		setTimeout(() => {
-			this.characters.stoppedCharacters();
-			// this.stopSound();
+		// setTimeout(() => {
+		// 	this.characters.stoppedCharacters();
+		// 	// this.stopSound();
 
-			//GAME 2
-			setTimeout(() => {
-				this.characters.deleteCharacter(1);
+		// 	//GAME 2
+		// 	setTimeout(() => {
+		// 		this.characters.deleteCharacter(1);
 
-				setTimeout(() => {
-					this.chairs.resizeChairs();
-					this.characters.resizeScene();
-					this.characters.startWalking();
-					// this.playSound();
-				}, 2500);
-			}, 2500);
-		}, 2000);
+		// 		setTimeout(() => {
+		// 			this.chairs.resizeChairs();
+		// 			this.characters.resizeScene();
+		// 			this.characters.startWalking();
+		// 			// this.playSound();
+		// 		}, 2500);
+		// 	}, 2500);
+		// }, 2000);
 		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();

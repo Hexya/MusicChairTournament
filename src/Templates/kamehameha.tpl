@@ -1,7 +1,9 @@
 module.exports = "<div class='game-content progress-bar kamehameha'>" +
-   "<div class='instruction'>" +
+   "<div class='instruction appear-card'>" +
       "<div class='press-txt'>" +
-         "<p>Press the key</p>" +
+         "<p class='final-txt'>FINAL</p>" +
+         "<p class='round-txt'>ROUND</p>" +
+         "<p>Be the king</p>" +
          "</div>" +
       "<div class='touch-pad unique-pad'>" +
          "<div class='touch first-touch haut-touch'></div>" +
@@ -11,28 +13,28 @@ module.exports = "<div class='game-content progress-bar kamehameha'>" +
          "</div>" +
       "</div>"+
    "<div class='players-container'>" +
-      "<div class='bar-final-cont'>" +
+      "<div class='bar-final-cont appear-bar'>" +
          "<div class='bar'>" +
-            "<div class='progress progress-left'></div>" +
+            "<div class='progress progress-left'><img src='' alt='Strike bar'></div>" +
             "<div class='progress progress-right'></div>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-1'>" +
+      "<div class='player-cont player-1 appear-card'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 1</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-2'>" +
+      "<div class='player-cont player-2 appear-card'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 2</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-3'>" +
+      "<div class='player-cont player-3 appear-card'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 3</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-4'>" +
+      "<div class='player-cont player-4 appear-card'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 4</p>" +
             "</div>" +

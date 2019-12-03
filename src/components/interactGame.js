@@ -2,8 +2,13 @@ let uniqueKey = require('../Templates/uniqueKey.tpl');
 let progressBar = require('../Templates/progressBar.tpl');
 let kamehameha = require('../Templates/kamehameha.tpl');
 let lastStay = require('../Templates/lastStay.tpl');
+let transitionTpl = require('../Templates/transitionTpl.tpl');
+
 
 import imgValidate from '../assets/img/Check.svg';
+import strikeBar from '../assets/img/CursorSvg.svg';
+
+import { Howl, Howler } from 'howler';
 
 export default class App {
 	constructor(numberGame) {
@@ -250,6 +255,10 @@ export default class App {
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
 
+		document.querySelector('.game-container .progress-left img').src = strikeBar;
+
+		this.transitionRound();
+
 		//Check player
 		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
 			if (
@@ -478,6 +487,11 @@ export default class App {
 				});
 			}
 		});
+	}
+
+	transitionRound() {
+		console.log('round');
+		document.querySelector('.game-container').innerHTML += transitionTpl;
 	}
 
 	// Method for remove ui
