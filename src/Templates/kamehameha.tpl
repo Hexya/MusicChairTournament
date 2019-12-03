@@ -1,4 +1,4 @@
-module.exports = "<div class='game-content progress-bar kamehameha'>" +
+module.exports = "<div class='game-content bar-evo kamehameha'>" +
    "<div class='instruction appear-card'>" +
       "<div class='press-txt'>" +
          "<p class='final-txt'>FINAL</p>" +
@@ -19,22 +19,22 @@ module.exports = "<div class='game-content progress-bar kamehameha'>" +
             "<div class='progress progress-right'></div>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-1 appear-card'>" +
+      "<div class='player-cont player-1 appear-card player-final'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 1</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-2 appear-card'>" +
+      "<div class='player-cont player-2 appear-card player-final'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 2</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-3 appear-card'>" +
+      "<div class='player-cont player-3 appear-card player-final'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 3</p>" +
             "</div>" +
          "</div>" +
-      "<div class='player-cont player-4 appear-card'>" +
+      "<div class='player-cont player-4 appear-card player-final'>" +
          "<div class='container-bar'>" +
             "<p class='player-txt'>PLAYER 4</p>" +
             "</div>" +

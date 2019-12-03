@@ -17,8 +17,8 @@ module.exports = "<div class='game-content progress-bar'>" +
             "<p class='player-txt'>PLAYER 1</p>" +
             "<p class='validate'>VALIDATE</p>" +
             "<div class='validate-icon'><img src='' alt='validate-icon'></div>" +
-            "<div class='bar-progress-cont'>" +
-               "<div class='bar-progress'></div>" +
+            "<div class='bar-progress-cont-2'>" +
+               "<div class='bar-progress-2'></div>" +
                "</div>" +
             "</div>" +
          "</div>" +
@@ -27,8 +27,8 @@ module.exports = "<div class='game-content progress-bar'>" +
             "<p class='player-txt'>PLAYER 2</p>" +
             "<p class='validate'>VALIDATE</p>" +
             "<div class='validate-icon'><img src='' alt='validate-icon'></div>" +
-            "<div class='bar-progress-cont'>" +
-               "<div class='bar-progress'></div>" +
+            "<div class='bar-progress-cont-2'>" +
+               "<div class='bar-progress-2'></div>" +
                "</div>" +
             "</div>" +
          "</div>" +
@@ -37,8 +37,8 @@ module.exports = "<div class='game-content progress-bar'>" +
             "<p class='player-txt'>PLAYER 3</p>" +
             "<p class='validate'>VALIDATE</p>" +
             "<div class='validate-icon'><img src='' alt='validate-icon'></div>" +
-            "<div class='bar-progress-cont'>" +
-               "<div class='bar-progress'></div>" +
+            "<div class='bar-progress-cont-2'>" +
+               "<div class='bar-progress-2'></div>" +
                "</div>" +
             "</div>" +
          "</div>" +
@@ -47,8 +47,8 @@ module.exports = "<div class='game-content progress-bar'>" +
             "<p class='player-txt'>PLAYER 4</p>" +
             "<p class='validate'>VALIDATE</p>" +
             "<div class='validate-icon'><img src='' alt='validate-icon'></div>" +
-            "<div class='bar-progress-cont'>" +
-               "<div class='bar-progress'></div>" +
+            "<div class='bar-progress-cont-2'>" +
+               "<div class='bar-progress-2'></div>" +
                "</div>" +
             "</div>" +
          "</div>" +

@@ -23,8 +23,9 @@ export default class App {
 		this.winnerArray = []; //First to finish
 		this.loserArray = []; //First to lose
 
-		this.winner = ['player-2', 'player-4'];
+		this.winner = ['player-1', 'player-2', 'player-3', 'player-4'];
 		this.incre = 1;
+		this.increment = 1;
 
 		// this.gameArray[numberGame]();
 		//this.randomGame();
@@ -42,10 +43,9 @@ export default class App {
 			document.querySelector('.' + player + '').classList.add('complete');
 		}, 500);
 
-		this.winnerArray.indexOf(player) === -1
-			? this.winnerArray.push(player)
-			: console.log('This item already exists');
-		console.log(this.winnerArray);
+		if (this.winnerArray.indexOf(player) === -1) {
+			this.winnerArray.push(player);
+		}
 	}
 
 	uniqueKey() {
@@ -58,9 +58,10 @@ export default class App {
 		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
 			if (
 				this.winner[0] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
-				this.winner[1] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1]
+				this.winner[1] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
+				this.winner[2] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
+				this.winner[3] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1]
 			) {
-				console.log(document.querySelectorAll('.player-cont')[i]);
 				document.querySelectorAll('.player-cont')[i].style.display = 'none';
 			} else {
 				document.querySelectorAll('.player-cont')[i].classList.add('winner-' + this.incre);
@@ -77,97 +78,99 @@ export default class App {
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				let keyCode = e.keyCode || e.which;
-				switch (randomArray[rand]) {
-					case 'haut':
-						if (keyCode == 90) {
-							//Z
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 79) {
-							//O
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 38) {
-							//^
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 53) {
-							//5
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'droite':
-						if (keyCode == 68) {
-							//D
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 77) {
-							//M
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 39) {
-							//>
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 51) {
-							//3
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'bas':
-						if (keyCode == 83) {
-							//S
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 76) {
-							//L
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 40) {
-							//v
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 50) {
-							//2
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					case 'gauche':
-						if (keyCode == 81) {
-							//Q
-							this.fullCircle('player-1');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 75) {
-							//K
-							this.fullCircle('player-2');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 37) {
-							//<
-							this.fullCircle('player-3');
-							this.isFinish(resolve, 4);
-						}
-						if (keyCode == 49) {
-							//1
-							this.fullCircle('player-4');
-							this.isFinish(resolve, 4);
-						}
-						break;
-					default:
+				if (document.querySelector('.unique-key')) {
+					let keyCode = e.keyCode || e.which;
+					switch (randomArray[rand]) {
+						case 'haut':
+							if (keyCode == 90) {
+								//Z
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 79) {
+								//O
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 38) {
+								//^
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 53) {
+								//5
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'droite':
+							if (keyCode == 68) {
+								//D
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 77) {
+								//M
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 39) {
+								//>
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 51) {
+								//3
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'bas':
+							if (keyCode == 83) {
+								//S
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 76) {
+								//L
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 40) {
+								//v
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 50) {
+								//2
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						case 'gauche':
+							if (keyCode == 81) {
+								//Q
+								this.fullCircle('player-1');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 75) {
+								//K
+								this.fullCircle('player-2');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 37) {
+								//<
+								this.fullCircle('player-3');
+								this.isFinish(resolve, 4);
+							}
+							if (keyCode == 49) {
+								//1
+								this.fullCircle('player-4');
+								this.isFinish(resolve, 4);
+							}
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -175,62 +178,81 @@ export default class App {
 
 	incrementProgressBar(player) {
 		if (
-			document.querySelector('.' + player + ' .bar-progress').offsetWidth <
-			document.querySelector('.' + player + ' .bar-progress-cont').offsetWidth
+			document.querySelector('.' + player + ' .bar-progress-2').offsetWidth <
+			document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth
 		) {
-			document.querySelector('.' + player + ' .bar-progress').style.width =
-				document.querySelector('.' + player + ' .bar-progress').offsetWidth + 20 + 'px';
+			document.querySelector('.' + player + ' .bar-progress-2').style.width =
+				document.querySelector('.' + player + ' .bar-progress-2').offsetWidth + 20 + 'px';
 		} else {
 			document.querySelector('.' + player + '').classList.add('complete');
-			this.winnerArray.indexOf(player) === -1
-				? this.winnerArray.push(player)
-				: console.log('This item already exists');
-			console.log(this.winnerArray);
+
+			console.log(document.querySelector('.' + player + ' .bar-progress-2').offsetWidth);
+			console.log(document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth);
+
+			if (this.winnerArray.indexOf(player) == -1) {
+				this.winnerArray.push(player);
+			}
 		}
 	}
+
 	progressBar() {
+		if (!this.progressBarIsReady) {
+			return false;
+		}
+
+		// document.querySelector('.players-container').parentNode.remove();
+
 		document.querySelector('.game-container').innerHTML = progressBar;
 		for (let i = 0; i < document.querySelectorAll('.validate-icon img').length; i++) {
 			document.querySelectorAll('.validate-icon img')[i].src = imgValidate;
 		}
 
+		document.querySelector('.' + this.winnerArray[this.winnerArray.length - 1]).style.display =
+			'none';
+		// console.log(this.winnerArray[this.winnerArray.length - 1]);
+
+		// Reset array of winner
+		this.winnerArray = [];
+
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				let key = e.keyCode || e.which;
-				switch (key) {
-					case 81: //Q P1
-						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 4);
-						break;
-					case 68: //D P1
-						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 4);
-						break;
-					case 75: //K P2
-						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 4);
-						break;
-					case 77: //M P2
-						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 4);
-						break;
-					case 37: //left walk P3
-						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 4);
-						break;
-					case 39: //right turn P3
-						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 4);
-						break;
-					case 49: //1 P4
-						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 4);
-						break;
-					case 51: //3 P4
-						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 4);
-						break;
-					default:
+				if (document.querySelector('.progress-bar')) {
+					let key = e.keyCode || e.which;
+					switch (key) {
+						case 81: //Q P1
+							this.incrementProgressBar('player-1');
+							this.isFinish(resolve, 3);
+							break;
+						case 68: //D P1
+							this.incrementProgressBar('player-1');
+							this.isFinish(resolve, 3);
+							break;
+						case 75: //K P2
+							this.incrementProgressBar('player-2');
+							this.isFinish(resolve, 3);
+							break;
+						case 77: //M P2
+							this.incrementProgressBar('player-2');
+							this.isFinish(resolve, 3);
+							break;
+						case 37: //left walk P3
+							this.incrementProgressBar('player-3');
+							this.isFinish(resolve, 3);
+							break;
+						case 39: //right turn P3
+							this.incrementProgressBar('player-3');
+							this.isFinish(resolve, 3);
+							break;
+						case 49: //1 P4
+							this.incrementProgressBar('player-4');
+							this.isFinish(resolve, 3);
+							break;
+						case 51: //3 P4
+							this.incrementProgressBar('player-4');
+							this.isFinish(resolve, 3);
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -251,6 +273,10 @@ export default class App {
 		}
 	}
 
+	progressBarIsReady(value) {
+		return value;
+	}
+
 	//ONLY FOR 2
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
@@ -260,54 +286,80 @@ export default class App {
 		this.transitionRound();
 
 		//Check player
-		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
+		for (let i = 0; i < document.querySelectorAll('.player-final').length; i++) {
 			if (
-				this.winner[0] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
-				this.winner[1] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1]
+				this.winnerArray[0] !=
+				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
+				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
 				console.log(document.querySelectorAll('.player-cont')[i]);
-				document.querySelectorAll('.player-cont')[i].style.display = 'none';
+				document.querySelectorAll('.player-final')[i].style.display = 'none';
 			} else {
-				document.querySelectorAll('.player-cont')[i].classList.add('winner-' + this.incre);
-				this.incre += 1;
+				document.querySelectorAll('.player-final')[i].classList.add('winner-' + this.increment);
+				this.increment += 1;
 			}
 		}
 
+		// document.querySelector('.' + this.winnerArray[this.winnerArray.length - 1]).style.display =
+		// 'none';
+
+		// Reset array of winner
+
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				if (
-					document.querySelector('.progress-right').offsetWidth < 30 ||
-					document.querySelector('.progress-right').offsetWidth > 670
-				) {
-					this.isFinish(resolve, 2);
-				}
-				let key = e.keyCode || e.which;
-				switch (key) {
-					case 81: //Q P1
-						this.progressKamehameha('player-1');
-						break;
-					case 68: //D P1
-						this.progressKamehameha('player-1');
-						break;
-					case 75: //K P2
-						this.progressKamehameha('player-2');
-						break;
-					case 77: //M P2
-						this.progressKamehameha('player-2');
-						break;
-					case 37: //left walk P3
-						this.progressKamehameha('player-3');
-						break;
-					case 39: //right turn P3
-						this.progressKamehameha('player-3');
-						break;
-					case 49: //1 P4
-						this.progressKamehameha('player-4');
-						break;
-					case 51: //3 P4
-						this.progressKamehameha('player-4');
-						break;
-					default:
+				console.log('ehhehe')
+				if (document.querySelector('.kamehameha')) {
+					if (
+						document.querySelector('.progress-right').offsetWidth < 30 ||
+						document.querySelector('.progress-right').offsetWidth > 670
+					) {
+						// this.isFinish(resolve, 2);
+					}
+
+					let key = e.keyCode || e.which;
+					switch (key) {
+						case 81: //Q P1
+							console.log('jejejeje')
+							this.progressKamehameha('player-1');
+							this.isFinish(resolve, 2);
+							break;
+						case 68: //D P1
+							console.log('jejejeje')
+							this.progressKamehameha('player-1');
+							this.isFinish(resolve, 2);
+							break;
+						case 75: //K P2
+							console.log('jejejeje')
+							this.progressKamehameha('player-2');
+							this.isFinish(resolve, 2);
+							break;
+						case 77: //M P2
+							console.log('jejejeje')
+							this.progressKamehameha('player-2');
+							this.isFinish(resolve, 2);
+							break;
+						case 37: //left walk P3
+							console.log('jejejeje')
+							this.progressKamehameha('player-3');
+							this.isFinish(resolve, 2);
+							break;
+						case 39: //right turn P3
+							console.log('jejejeje')
+							this.progressKamehameha('player-3');
+							this.isFinish(resolve, 2);
+							break;
+						case 49: //1 P4
+							console.log('jejejeje')
+							this.progressKamehameha('player-4');
+							this.isFinish(resolve, 2);
+							break;
+						case 51: //3 P4
+							console.log('jejejeje')
+							this.progressKamehameha('player-4');
+							this.isFinish(resolve, 2);
+							break;
+						default:
+					}
 				}
 			});
 		});
@@ -498,21 +550,25 @@ export default class App {
 	resetGame() {
 		//remove element
 		document.querySelector('.instruction').classList.remove('appear-card');
+
 		setTimeout(() => {
 			document.querySelector('.instruction').classList.add('remove-card');
 			for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
 				document.querySelectorAll('.player-cont')[i].classList.remove('appear-card');
 				setTimeout(() => {
 					document.querySelectorAll('.player-cont')[i].classList.add('remove-card');
-				}, 100)
+				}, 100);
 			}
-		}, 100)
+		}, 100);
+
 		setTimeout(() => {
 			document.querySelector('.game-container').innerHTML = '';
-		}, 700)
+		}, 700);
 	}
 
 	isFinish(resolve, max) {
+		console.log(this.winnerArray);
+
 		if (this.winnerArray.length == max) {
 			setTimeout(() => {
 				this.resetGame();
@@ -520,9 +576,6 @@ export default class App {
 
 			setTimeout(() => {
 				resolve(parseInt(this.winnerArray[this.winnerArray.length - 1].charAt(7)) - 1);
-
-				this.winnerArray = [];
-				this.loserArray = [];
 			}, 2000);
 		}
 	}
