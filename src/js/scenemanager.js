@@ -63,13 +63,14 @@ class Scene01 extends SceneManager {
 		this.game = new interactGame();
 
 		//Start game INTRO GAME
-		/*new introGame().then(() => {
+		new introGame().then(() => {
 			this.sound.play();
 
 			setTimeout(() => {
 				//
 				this.sound.stop();
 
+				// Start first game
 				this.game.uniqueKey().then(looser => {
 					this.characters.stoppedCharacters();
 
@@ -81,22 +82,34 @@ class Scene01 extends SceneManager {
 							this.characters.resizeScene();
 							this.characters.startWalking();
 
-							this.game.progressBar().then(looser2 => {
+							// Start game two
+							this.game.progressBar().then(looser => {
 								this.characters.stoppedCharacters();
 
-								// console.log(looser2);
-
 								setTimeout(() => {
-									this.characters.deleteCharacter(parseInt(looser2));
-								}, 2500);
+									this.characters.deleteCharacter(parseInt(looser));
+
+									setTimeout(() => {
+										this.chairs.resizeChairs();
+										this.characters.resizeScene();
+										this.characters.startWalking();
+
+										// Start game two
+										this.game.kamehameha().then(looser3 => {
+											this.progressBarIsReady(false);
+											console.log(looser3);
+											this.characters.stoppedCharacters();
+										});
+									}, 2500);
+								}, 1500);
 							});
 						}, 2500);
 					}, 1500);
 				});
 			}, 2500);
-		});*/
+		});
 
-		setTimeout(() => {
+		/*setTimeout(() => {
 			this.characters.stoppedCharacters();
 			// this.stopSound();
 
@@ -111,7 +124,7 @@ class Scene01 extends SceneManager {
 					// this.playSound();
 				}, 2500);
 			}, 2500);
-		}, 2000);
+		}, 2000);*/
 		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
@@ -169,7 +182,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function (buffer) {
+			audioLoader.load(Music, function(buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);

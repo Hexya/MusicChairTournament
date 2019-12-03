@@ -1,365 +1,410 @@
 .progress-bar {
-    .instruction {
-        height: auto;
-        width: auto;
-        max-width: 650px;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        background: #fff;
-        border: 5px solid #000;
-        box-shadow: 20px 20px 1px #000;
-        border-radius: 30px;
-        padding: 60px;
-        &.appear-card {
-            transition: all .5s;
+  .instruction {
+    height: auto;
+    width: auto;
+    max-width: 650px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff;
+    border: 5px solid #000;
+    box-shadow: 20px 20px 1px #000;
+    border-radius: 30px;
+    padding: 60px;
+    &.appear-card {
+      transition: all 0.5s;
+      opacity: 0;
+      animation: appearCards 0.5s ease-out forwards;
+      @keyframes appearCards {
+        from {
+          transform: translateX(-50%) scale(0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-50%) scale(1);
+          opacity: 1;
+        }
+      }
+    }
+    &.remove-card {
+      animation: removeCards 0.5s ease-out forwards;
+      @keyframes removeCards {
+        from {
+          transform: translateX(-50%) scale(1);
+          opacity: 1;
+        }
+        30% {
+          transform: translateX(-50%) scale(1.2);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-50%) scale(0);
+          opacity: 0;
+        }
+      }
+    }
+    p {
+      margin-top: 0px;
+      text-align: center;
+    }
+    .press-txt {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      font-size: 16px;
+      color: #000;
+      font-weight: bold;
+      text-transform: uppercase;
+      p {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .players-container {
+    height: calc(100vh - (50vh));
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .player-cont {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      &.appear-card {
+        transition: all 0.5s;
+        opacity: 0;
+        animation: appearCard 0.5s ease-out forwards;
+        animation-delay: 1s;
+        @keyframes appearCard {
+          from {
+            transform: scale(0);
             opacity: 0;
-            animation: appearCards .5s ease-out forwards;
-            @keyframes appearCards {
-                from{transform: translateX(-50% )scale(0);opacity: 0;}
-                50%{opacity: 1;}
-                to{transform: translateX(-50%) scale(1);opacity: 1;}
-            }
+          }
+          50% {
+            opacity: 1;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
-        &.remove-card {
-            animation: removeCards .5s ease-out forwards;
-            @keyframes removeCards {
-                from{transform: translateX(-50% )scale(1);opacity: 1;}
-                30%{transform: translateX(-50% )scale(1.2);opacity: 1;}
-                to{transform: translateX(-50%) scale(0);opacity: 0;}
-            }
+      }
+      &.remove-card {
+        animation: removeCard 0.5s ease-out forwards;
+        @keyframes removeCard {
+          from {
+            transform: scale(1);
+            opacity: 1;
+          }
+          30% {
+            transform: scale(1.2);
+            opacity: 1;
+          }
+          to {
+            transform: scale(0);
+            opacity: 0;
+          }
         }
-        p {
-            margin-top: 0px;
-            text-align: center;
-        }
-        .press-txt{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            font-size: 16px;
-            color: #000;
-            font-weight: bold;
-            text-transform: uppercase;
-            p {
-                margin-bottom: 30px;
-            }
-        }
-    }
-    .players-container {
-        height: calc(100vh - (50vh));
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        .player-cont {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 30%;
-            &.appear-card {
-                transition: all .5s;
-                opacity: 0;
-                animation: appearCard .5s ease-out forwards;
-                animation-delay: 1s;
-                @keyframes appearCard {
-                    from{transform: scale(0);opacity: 0;}
-                    50%{opacity: 1;}
-                    to{transform: scale(1);opacity: 1;}
-                }
-            }
-            &.remove-card {
-                animation: removeCard .5s ease-out forwards;
-                @keyframes removeCard {
-                    from{transform: scale(1);opacity: 1;}
-                    30%{transform: scale(1.2);opacity: 1;}
-                    to{transform: scale(0);opacity: 0;}
-                }
-            }
-            .container-bar {
-                height: 100px;
-                width: 300px;   
-                border: 4px solid #000;
-                border-radius: 30px;
-                background: #fff;
-                overflow: hidden;
-                position: relative;
-                margin-bottom: 30px;
-                box-shadow: 10px 10px 1px #000;
-                border: 5px solid #000;
-                .player-txt {
-                    position: absolute;
-                    top: 30%;
-                    left: 50%;
-                    margin: 2px 0 0 0;
-                    transform: translate(-50%, -50%);
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #000;
-                    transition: all .5s;
-                }
-                .validate {
-                    position: absolute;
-                    top: 50%;
-                    left: 10%;
-                    margin: 2px 0 0 0;
-                    font-size: 28px;
-                    font-weight: bold;
-                    color: #000;
-                    opacity: 0;
-                    transition: all 0.1s;
-                }
-                .validate-icon {
-                    position: absolute;
-                    top: 25px;
-                    right: 20px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 100px;
-                    color: #fff;
-                    height: 50px;
-                    width: 50px;
-                    margin: 2px 0 0 0;
-                    font-size: 28px;
-                    font-weight: bold;
-                    opacity: 0;
-                    transform: scale(0);
-                    transition: all 0.25s;
-                    img {
-                        width: 140%;
-                    }
-                }
-                .bar-progress-cont {
-                    position: absolute;
-                    width: 80%;
-                    background: #DEDEDE;
-                    bottom: 20px;
-                    left: 10%;
-                    overflow: hidden;
-                    height: 15px;
-                    border-radius: 50px;
-                    border: 2px solid black;
-                    box-shadow: 5px 2px 1px #000;
-                    transition: opacity .5s;
-                    .bar-progress{
-                        height: 15px;
-                        /* width: 30%; */
-                        transition: all 0.3s;
-                        width: 0%;
-                        background: purple;
-                        border-radius: 20px;
-                        border: 1px solid black;
-                        margin-top: -1px;
-                        margin-left: -1px; 
-                    }
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        height: 2px;
-                        width: 40px;
-                        background: #fff;
-                        top: 3px;
-                        left: 10px;
-                    }
-                    &:after {
-                        content: '';
-                        position: absolute;
-                        height: 2px;
-                        width: 10px;
-                        background: #fff;
-                        top: 3px;
-                        left: 55px;
-                    }
-                }
-            }
-            &.complete {
-                .container-bar {
-                    .player-txt {
-                        transition: all .5s;
-                        left: 30%;
-                    }
-                    .validate {
-                        opacity: 1;
-                    }
-                    .validate-icon {
-                        transform: scale(1);
-                        opacity: 1;
-                    }
-                    .bar-progress-cont {
-                        transition: opacity .5s;
-                        opacity: 0;
-                        .bar-progress {
-                        }
-                    }
-                }
-            }
-        }
-        .player-1 {
-            &.complete {
-                .container-bar {
-                    background: #FFC03F;
-                }
-            }
-            .container-bar {
-                .bar-progress-cont {
-                    .bar-progress{
-                        background: #FFC03F;
-                    }
-                }
-            }
-        }
-        .player-2 {
-            &.complete {
-                .container-bar {
-                    background: #2D9DE7;
-                }
-            }
-            .container-bar {
-                .bar-progress-cont {
-                    .bar-progress{
-                        background: #2D9DE7;
-                    }
-                }
-            }
-        }
-        .player-3 {
-            &.complete {
-                .container-bar {
-                    background: #3ADD4A;
-                }
-            }
-            .container-bar {
-                .bar-progress-cont {
-                    .bar-progress{
-                        background: #3ADD4A;
-                    }
-                }
-            }
-        }
-        .player-4 {
-            &.complete {
-                .container-bar {
-                    background: #A852FF;
-                }
-            }
-            .container-bar {
-                .bar-progress-cont {
-                    .bar-progress{
-                        background: #A852FF;
-                    }
-                }
-            }
-        }
-
-    }
-    .touch-pad {
-        z-index: 1;
-        display: flex;
+      }
+      .container-bar {
+        height: 100px;
         width: 300px;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        .touch {
-            width: 70px;
-            height: 70px;
-            background: #FFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 5px solid #000;
-            border-radius: 8px;
-            box-shadow: 4px 7px 1px #000;
-            color: #000;
-            position: relative;
-            opacity: .5;
+        border: 4px solid #000;
+        border-radius: 30px;
+        background: #fff;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 30px;
+        box-shadow: 10px 10px 1px #000;
+        border: 5px solid #000;
+        .player-txt {
+          position: absolute;
+          top: 30%;
+          left: 50%;
+          margin: 2px 0 0 0;
+          transform: translate(-50%, -50%);
+          font-size: 16px;
+          font-weight: bold;
+          color: #000;
+          transition: all 0.5s;
         }
-        .first-touch {
-            margin: 0px 100px 10px 100px;
+        .validate {
+          position: absolute;
+          top: 50%;
+          left: 10%;
+          margin: 2px 0 0 0;
+          font-size: 28px;
+          font-weight: bold;
+          color: #000;
+          opacity: 0;
+          transition: all 0.1s;
         }
-        .haut-touch {
-            &:before {
-                content: '';
-                position: absolute;
-                top: 25px;
-                left: 50%;
-                transform: translate(-50%);
-                width: 0; 
-                height: 0; 
-                border-left: 15px solid transparent;
-                border-right: 15px solid transparent;
-                border-bottom: 25px solid #000;
-            }
+        .validate-icon {
+          position: absolute;
+          top: 25px;
+          right: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100px;
+          color: #fff;
+          height: 50px;
+          width: 50px;
+          margin: 2px 0 0 0;
+          font-size: 28px;
+          font-weight: bold;
+          opacity: 0;
+          transform: scale(0);
+          transition: all 0.25s;
+          img {
+            width: 140%;
+          }
         }
-        .gauche-touch {
-            &:before {
-                content: '';
-                position: absolute;
-                top: 20px;
-                left: 50%;
-                transform: translate(-50%);
-                width: 0; 
-                height: 0; 
-                border-top: 15px solid transparent;
-                border-bottom: 15px solid transparent; 
-                border-right: 25px solid #000; 
-            }
+        .bar-progress-cont-2 {
+          position: absolute;
+          width: 80%;
+          background: #dedede;
+          bottom: 20px;
+          left: 10%;
+          overflow: hidden;
+          height: 15px;
+          border-radius: 50px;
+          border: 2px solid black;
+          box-shadow: 5px 2px 1px #000;
+          transition: opacity 0.5s;
+          .bar-progress-2 {
+            height: 15px;
+            /* width: 30%; */
+            transition: all 0.3s;
+            width: 0%;
+            background: purple;
+            border-radius: 20px;
+            border: 1px solid black;
+            margin-top: -1px;
+            margin-left: -1px;
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 40px;
+            background: #fff;
+            top: 3px;
+            left: 10px;
+          }
+          &:after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 10px;
+            background: #fff;
+            top: 3px;
+            left: 55px;
+          }
         }
-        .bas-touch {
-            &:before {
-                content: '';
-                position: absolute;
-                top: 25px;
-                left: 50%;
-                transform: translate(-50%);
-                width: 0; 
-                height: 0; 
-                border-left: 15px solid transparent;
-                border-right: 15px solid transparent;
-                border-top: 25px solid #000;
-            }
-        }
-        .droite-touch {
-            &:before {
-                content: '';
-                position: absolute;
-                top: 20px;
-                left: 50%;
-                transform: translate(-50%);
-                width: 0; 
-                height: 0; 
-                border-top: 15px solid transparent;
-                border-bottom: 15px solid transparent;
-                border-left: 25px solid #000;
-            }
-        }
-        .active-touch-left {
+      }
+      &.complete {
+        .container-bar {
+          .player-txt {
+            transition: all 0.5s;
+            left: 30%;
+          }
+          .validate {
             opacity: 1;
-            &:before {
-                filter:invert(1);
-            }
-            animation: cling .25s linear infinite;
-            @keyframes cling {
-                from { background: #fff;}
-                50% { background: #1D9EFF;}
-                to { background: #fff;}
-            }
-        }
-        .active-touch-right {
+          }
+          .validate-icon {
+            transform: scale(1);
             opacity: 1;
-            &:before {
-                filter:invert(1);
+          }
+          .bar-progress-cont-2 {
+            transition: opacity 0.5s;
+            opacity: 0;
+            .bar-progress {
             }
-            animation: cling .25s linear infinite;
-            animation-delay: .125s;
-            @keyframes cling {
-                from { background: #fff;}
-                50% { background: #1D9EFF;}
-                to { background: #fff;}
-            }
+          }
         }
+      }
     }
+    .player-1 {
+      &.complete {
+        .container-bar {
+          background: #ffc03f;
+        }
+      }
+      .container-bar {
+        .bar-progress-cont-2 {
+          .bar-progress-2 {
+            background: #ffc03f;
+          }
+        }
+      }
+    }
+    .player-2 {
+      &.complete {
+        .container-bar {
+          background: #2d9de7;
+        }
+      }
+      .container-bar {
+        .bar-progress-cont-2 {
+          .bar-progress-2 {
+            background: #2d9de7;
+          }
+        }
+      }
+    }
+    .player-3 {
+      &.complete {
+        .container-bar {
+          background: #3add4a;
+        }
+      }
+      .container-bar {
+        .bar-progress-cont-2 {
+          .bar-progress-2 {
+            background: #3add4a;
+          }
+        }
+      }
+    }
+    .player-4 {
+      &.complete {
+        .container-bar {
+          background: #a852ff;
+        }
+      }
+      .container-bar {
+        .bar-progress-cont-2 {
+          .bar-progress-2 {
+            background: #a852ff;
+          }
+        }
+      }
+    }
+  }
+  .touch-pad {
+    z-index: 1;
+    display: flex;
+    width: 300px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .touch {
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 5px solid #000;
+      border-radius: 8px;
+      box-shadow: 4px 7px 1px #000;
+      color: #000;
+      position: relative;
+      opacity: 0.5;
+    }
+    .first-touch {
+      margin: 0px 100px 10px 100px;
+    }
+    .haut-touch {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 25px solid #000;
+      }
+    }
+    .gauche-touch {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 25px solid #000;
+      }
+    }
+    .bas-touch {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 25px solid #000;
+      }
+    }
+    .droite-touch {
+      &:before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 25px solid #000;
+      }
+    }
+    .active-touch-left {
+      opacity: 1;
+      &:before {
+        filter: invert(1);
+      }
+      animation: cling 0.25s linear infinite;
+      @keyframes cling {
+        from {
+          background: #fff;
+        }
+        50% {
+          background: #1d9eff;
+        }
+        to {
+          background: #fff;
+        }
+      }
+    }
+    .active-touch-right {
+      opacity: 1;
+      &:before {
+        filter: invert(1);
+      }
+      animation: cling 0.25s linear infinite;
+      animation-delay: 0.125s;
+      @keyframes cling {
+        from {
+          background: #fff;
+        }
+        50% {
+          background: #1d9eff;
+        }
+        to {
+          background: #fff;
+        }
+      }
+    }
+  }
 }
