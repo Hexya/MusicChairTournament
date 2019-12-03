@@ -44,6 +44,7 @@ class Character extends ComponentManager {
 
 				character.scene.position.x = x * this.options.distRadius;
 				character.scene.position.z = z * this.options.distRadius;
+				character.scene.scale.set(1.25, 1.25, 1.25);
 
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
 				var material = new THREE.MeshBasicMaterial({ color: 0x14ceff });
@@ -84,9 +85,9 @@ class Character extends ComponentManager {
 				character.animations[1].clip = { value: turning };
 
 				// Animation sitting
-				let sitting = THREE.AnimationClip.findByName(character.animations, 'Sitting');
-				character.animations[2].mixer = { value: mixer };
-				character.animations[2].clip = { value: sitting };
+				// let sitting = THREE.AnimationClip.findByName(character.animations, 'Sitting');
+				// character.animations[2].mixer = { value: mixer };
+				// character.animations[2].clip = { value: sitting };
 
 				this.meshCharacters.add(character.scene);
 				this.characters.push(character);
@@ -122,13 +123,13 @@ class Character extends ComponentManager {
 		for (let i = 0; i < this.characters.length; i++) {
 			let walking = this.getAction(this.characters[i].animations[0]);
 			let turning = this.getAction(this.characters[i].animations[1]);
-			let sitting = this.getAction(this.characters[i].animations[2]);
+			// let sitting = this.getAction(this.characters[i].animations[2]);
 
 			walking.play();
 			// turning.stop()
-			sitting.stop();
+			// turning.play();
 
-			sitting.crossFadeTo(walking, 1, true);
+			// walking.crossFadeTo(turning, 1, true);
 		}
 	}
 
@@ -136,17 +137,17 @@ class Character extends ComponentManager {
 		for (let i = 0; i < this.characters.length; i++) {
 			let walking = this.getAction(this.characters[i].animations[0]);
 			let turning = this.getAction(this.characters[i].animations[1]);
-			let sitting = this.getAction(this.characters[i].animations[2]);
+			// let sitting = this.getAction(this.characters[i].animations[2]);
 
 			// turning.loop = THREE.LoopOnce;
 			// turning.clampWhenFinished = true;
 			// turning.play();
 
-			sitting.loop = THREE.LoopOnce;
-			sitting.clampWhenFinished = true;
-			sitting.play();
+			turning.loop = THREE.LoopOnce;
+			turning.clampWhenFinished = true;
+			turning.play();
 
-			walking.crossFadeTo(sitting, 1, true);
+			walking.crossFadeTo(turning, 1, true);
 
 			setTimeout(() => {
 				walking.stop();
@@ -238,7 +239,7 @@ class Character extends ComponentManager {
 				this.meshCharacters.rotation.y += speed * 0.65 * walkingAction.getEffectiveWeight();
 			}
 
-			if (this.meshCharacters.rotation.y > this.stepBetweenChair) {
+			if (this.meshCharacters.rotation.y + Math.PI / 9 > this.stepBetweenChair) {
 				this.stepBetweenChair += (2 * Math.PI) / this.options.nbCharacters;
 
 				if (this.options.currentChair < this.characters.length - 1) {
@@ -290,6 +291,10 @@ class Character extends ComponentManager {
 		// 	}
 		// }
 		// this.characters.splice(2, 1);
+	}
+
+	click(event) {
+		console.log(this.scene.children);
 	}
 
 	addGUI(gui) {

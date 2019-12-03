@@ -79,7 +79,7 @@ module.exports = {
 			},
 			{
 				test: /\.glsl$/,
-				loader: 'webpack-glsl',
+				loader: 'webpack-glsl-loader',
 			},
 			{
 				test: /\.(gltf|glb)$/,

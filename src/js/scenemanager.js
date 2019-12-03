@@ -7,6 +7,8 @@ import SceneManager from '../utils/scene.manager';
 import introGame from '../components/introGame.js';
 import interactGame from '../components/interactGame.js';
 
+const vertexShader = require('../shader/waterFragment.glsl');
+
 import Helpers from '../utils/helpers.three';
 
 // Components
@@ -33,10 +35,8 @@ class Scene01 extends SceneManager {
 			speed: 1.2,
 		};
 
-		//INTRO GAME
-		//new introGame();
 		//INTERACT GAME
-		//new interactGame(2);
+		// new interactGame(0);
 
 		// Init all components
 		this.addComponents(new Terrain(this.scene));
@@ -58,26 +58,31 @@ class Scene01 extends SceneManager {
 		this.soundLoaded = this.createSound().then(sound => {
 			this.sound = sound;
 			this.soundIsReady = true;
-			this.playSound();
 		});
 
-		setTimeout(() => {
-			this.characters.stoppedCharacters();
-			this.stopSound();
-			//GAME 1
+		this.game = new interactGame();
+
+		//Start game INTRO GAME
+		new introGame().then(() => {
+			this.sound.play();
+
 			setTimeout(() => {
-				this.characters.deleteCharacter(5);
+				//
+				this.sound.stop();
 
-				setTimeout(() => {
-					this.chairs.resizeChairs();
-					this.characters.resizeScene();
-					this.characters.startWalking();
-					this.playSound();
-				}, 2500);
+				this.game.progressBar().then(looser => {
+					this.characters.stoppedCharacters();
+
+					console.log(looser);
+
+					setTimeout(() => {
+						this.characters.deleteCharacter(parseInt(looser));
+					}, 1500);
+				});
 			}, 2500);
-		}, 5000);
+		});
 
-		setTimeout(() => {
+		/*setTimeout(() => {
 			this.characters.stoppedCharacters();
 			this.stopSound();
 			//GAME 2
@@ -138,7 +143,7 @@ class Scene01 extends SceneManager {
 				// 	this.playSound();
 				// }, 5000);
 			}, 5000);
-		}, 45000);
+		}, 45000);*/
 	}
 
 	createSound() {
@@ -149,7 +154,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function (buffer) {
+			audioLoader.load(Music, function(buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);
@@ -159,12 +164,40 @@ class Scene01 extends SceneManager {
 		});
 	}
 
-	playSound() {
-		this.sound.play();
+	round1() {
+		setTimeout(() => {
+			//GAME 1
+			setTimeout(() => {
+				this.characters.deleteCharacter(5);
+
+				setTimeout(() => {
+					this.chairs.resizeChairs();
+					this.characters.resizeScene();
+					this.characters.startWalking();
+					this.sound.play();
+				}, 2500);
+			}, 2500);
+		}, 5000);
 	}
 
-	stopSound() {
-		this.sound.pause();
+	round2() {
+		this.game.progressBar().then(looser => {
+			// Reset for the new scene
+			this.chairs.resizeChairs();
+			this.characters.resizeScene();
+			this.characters.startWalking();
+			this.playSound();
+
+			console.log(looser);
+
+			setTimeout(() => {
+				this.characters.stoppedCharacters();
+
+				setTimeout(() => {
+					this.characters.deleteCharacter(parseInt(looser));
+				}, 1500);
+			}, 2500);
+		});
 	}
 }
 
