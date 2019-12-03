@@ -34,8 +34,8 @@ class Character extends ComponentManager {
 	createScene(nb) {
 		for (let i = 0; i < this.options.nbCharacters; i++) {
 			// Set position X Y of characters
-			let x = Math.sin((2 * i * Math.PI) / nb);
-			let z = Math.cos((2 * i * Math.PI) / nb);
+			let x = Math.sin((2 * i * Math.PI) / this.options.nbCharacters);
+			let z = Math.cos((2 * i * Math.PI) / this.options.nbCharacters);
 
 			// Create character
 			let loadCharacter = this.generateCharacter().then(character => {
@@ -44,10 +44,10 @@ class Character extends ComponentManager {
 
 				character.scene.position.x = x * this.options.distRadius;
 				character.scene.position.z = z * this.options.distRadius;
-				character.scene.scale.set(1.25, 1.25, 1.25);
+				character.scene.scale.set(0.175, 0.175, 0.175);
 
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
-				var material = new THREE.MeshBasicMaterial({ color: 0x14ceff });
+				var material = new THREE.MeshBasicMaterial({ color: 0x00007d });
 				var gate = new THREE.Mesh(geometryGate, material);
 				gate.position.x = x * this.options.distRadius * 0.85;
 				gate.position.y = 0;
@@ -55,22 +55,25 @@ class Character extends ComponentManager {
 				gate.visible = false;
 				gate.name = 'Gate n°' + i;
 
-				var geometryTorus = new THREE.TorusGeometry(0.75, 0.1, 14, 100);
-				var material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-				var torus = new THREE.Mesh(geometryTorus, material);
-				torus.rotation.x = Math.PI / 2;
-				gate.add(torus);
-
-				character.scene.traverse(child => {
+				/*character.scene.traverse(child => {
 					if (child.material) {
-						child.material.color = new THREE.Color(Math.random() * 0xffffff);
-						child.material.emissive = new THREE.Color(Math.random() * 0xffffff);
+						// child.material.color = new THREE.Color(Math.random() * 0xffffff);
+						// child.material.emissive = new THREE.Color(Math.random() * 0xffffff);
 						// child.material.wireframe = true;
 					}
-				});
+
+					if (child.name == 'bonnet') {
+						child.material.color = new THREE.Color(Math.random() * 0xffffff);
+						child.material.emissive = new THREE.Color(Math.random() * 0xffffff);
+						console.log(child);
+					}
+				});*/
+
+				console.log(character.scene);
 
 				character.scene.rotation.y =
-					(this.options.side == 1 ? -Math.PI : Math.PI) / 2 + ((2 * Math.PI) / nb) * i;
+					(this.options.side == 1 ? -Math.PI : Math.PI) / 2 +
+					((2 * Math.PI) / this.options.nbCharacters) * i;
 
 				// Animation walking
 				let mixer = new THREE.AnimationMixer(character.scene);
@@ -123,13 +126,13 @@ class Character extends ComponentManager {
 		for (let i = 0; i < this.characters.length; i++) {
 			let walking = this.getAction(this.characters[i].animations[0]);
 			let turning = this.getAction(this.characters[i].animations[1]);
-			// let sitting = this.getAction(this.characters[i].animations[2]);
 
+			turning.reset();
+			turning.stop();
+
+			walking.reset();
 			walking.play();
-			// turning.stop()
-			// turning.play();
-
-			// walking.crossFadeTo(turning, 1, true);
+			turning.crossFadeTo(walking, 1, true);
 		}
 	}
 
@@ -137,21 +140,12 @@ class Character extends ComponentManager {
 		for (let i = 0; i < this.characters.length; i++) {
 			let walking = this.getAction(this.characters[i].animations[0]);
 			let turning = this.getAction(this.characters[i].animations[1]);
-			// let sitting = this.getAction(this.characters[i].animations[2]);
-
-			// turning.loop = THREE.LoopOnce;
-			// turning.clampWhenFinished = true;
-			// turning.play();
 
 			turning.loop = THREE.LoopOnce;
 			turning.clampWhenFinished = true;
 			turning.play();
 
 			walking.crossFadeTo(turning, 1, true);
-
-			setTimeout(() => {
-				walking.stop();
-			}, 1000);
 		}
 	}
 
@@ -165,6 +159,8 @@ class Character extends ComponentManager {
 
 		let gate = this.scene.getObjectByName('Gates').children[currentChair];
 		gate.visible = true;
+
+		console.log(this.scene.getObjectByName('Chairs').children[currentChair].position);
 
 		anime({
 			targets: gate.scale,
@@ -200,8 +196,6 @@ class Character extends ComponentManager {
 			this.scene
 				.getObjectByName('Gates')
 				.remove(this.scene.getObjectByName('Gate n°' + currentChair.toString()));
-
-			console.log(this.scene.getObjectByName('Gates'));
 		}, 1500);
 
 		this.options.nbCharacters--;
@@ -234,7 +228,7 @@ class Character extends ComponentManager {
 			let walkingAction = walkingMixer.clipAction(walkingClip);
 
 			if (this.options.side == 1) {
-				this.meshCharacters.rotation.y -= walkingAction.getEffectiveWeight();
+				this.meshCharacters.rotation.y -= speed * 0.65 * walkingAction.getEffectiveWeight();
 			} else {
 				this.meshCharacters.rotation.y += speed * 0.65 * walkingAction.getEffectiveWeight();
 			}

@@ -30,7 +30,7 @@ class Scene01 extends SceneManager {
 		this.scene.add(Helpers.grid());
 
 		this.options = {
-			nbCharacters: 6,
+			nbCharacters: 4,
 			distRadius: 2,
 			speed: 1.2,
 		};
@@ -63,57 +63,72 @@ class Scene01 extends SceneManager {
 		this.game = new interactGame();
 
 		//Start game INTRO GAME
-		new introGame().then(() => {
+		/*new introGame().then(() => {
 			this.sound.play();
 
 			setTimeout(() => {
 				//
 				this.sound.stop();
 
-				this.game.progressBar().then(looser => {
+				this.game.uniqueKey().then(looser => {
 					this.characters.stoppedCharacters();
-
-					console.log(looser);
 
 					setTimeout(() => {
 						this.characters.deleteCharacter(parseInt(looser));
+
+						setTimeout(() => {
+							this.chairs.resizeChairs();
+							this.characters.resizeScene();
+							this.characters.startWalking();
+
+							this.game.progressBar().then(looser2 => {
+								this.characters.stoppedCharacters();
+
+								// console.log(looser2);
+
+								setTimeout(() => {
+									this.characters.deleteCharacter(parseInt(looser2));
+								}, 2500);
+							});
+						}, 2500);
 					}, 1500);
 				});
 			}, 2500);
-		});
+		});*/
 
-		/*setTimeout(() => {
+		setTimeout(() => {
 			this.characters.stoppedCharacters();
-			this.stopSound();
+			// this.stopSound();
+
 			//GAME 2
 			setTimeout(() => {
-				this.characters.deleteCharacter(4);
+				this.characters.deleteCharacter(1);
 
 				setTimeout(() => {
 					this.chairs.resizeChairs();
 					this.characters.resizeScene();
 					this.characters.startWalking();
-					this.playSound();
+					// this.playSound();
 				}, 2500);
 			}, 2500);
-		}, 15000);
-
+		}, 2000);
+		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
-			this.stopSound();
+			// this.stopSound();
 
 			setTimeout(() => {
-				this.characters.deleteCharacter(3);
+				this.characters.deleteCharacter(2);
 				//GAME FINAL
 				setTimeout(() => {
 					this.chairs.resizeChairs();
 					this.characters.resizeScene();
 					this.characters.startWalking();
-					this.playSound();
+					// this.playSound();
 				}, 5000);
 			}, 2000);
-		}, 25000);
-
+		}, 12000);*/
+		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
 			this.stopSound();

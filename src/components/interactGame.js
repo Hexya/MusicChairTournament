@@ -8,6 +8,7 @@ import imgValidate from '../assets/img/Check.svg';
 export default class App {
 	constructor(numberGame) {
 		this.choice;
+
 		this.gameArray = [
 			this.uniqueKey.bind(this),
 			this.progressBar.bind(this),
@@ -501,9 +502,14 @@ export default class App {
 		if (this.winnerArray.length == max) {
 			setTimeout(() => {
 				this.resetGame();
-			}, 3000);
+			}, 1000);
 
-			resolve(this.winnerArray[this.winnerArray.length - 1].charAt(7));
+			setTimeout(() => {
+				resolve(parseInt(this.winnerArray[this.winnerArray.length - 1].charAt(7)) - 1);
+
+				this.winnerArray = [];
+				this.loserArray = [];
+			}, 2000);
 		}
 	}
 }
