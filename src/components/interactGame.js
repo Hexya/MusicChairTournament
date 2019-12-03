@@ -188,10 +188,6 @@ export default class App {
 	}
 
 	progressBar() {
-		if (!this.progressBarIsReady) {
-			return false;
-		}
-
 		// document.querySelector('.players-container').parentNode.remove();
 
 		document.querySelector('.game-container').innerHTML = progressBar;
