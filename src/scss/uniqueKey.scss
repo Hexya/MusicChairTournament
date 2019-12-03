@@ -14,6 +14,24 @@
         box-shadow: 20px 20px 1px #000;
         border-radius: 30px;
         padding: 60px;
+        &.appear-card {
+            transition: all .5s;
+            opacity: 0;
+            animation: appearCards .5s ease-out forwards;
+            @keyframes appearCards {
+                from{transform: translateX(-50% )scale(0);opacity: 0;}
+                50%{opacity: 1;}
+                to{transform: translateX(-50%) scale(1);opacity: 1;}
+            }
+        }
+        &.remove-card {
+            animation: removeCards .5s ease-out forwards;
+            @keyframes removeCards {
+                from{transform: translateX(-50% )scale(1);opacity: 1;}
+                30%{transform: translateX(-50% )scale(1.2);opacity: 1;}
+                to{transform: translateX(-50%) scale(0);opacity: 0;}
+            }
+        }
         p {
             margin-top: 0px;
             text-align: center;
@@ -27,6 +45,9 @@
             color: #000;
             font-weight: bold;
             text-transform: uppercase;
+            p {
+                margin-bottom: 30px;
+            }
         }
     }
     .players-container {
@@ -40,6 +61,25 @@
             justify-content: center;
             align-items: center;
             width: 30%;
+            &.appear-card {
+                transition: all .5s;
+                opacity: 0;
+                animation: appearCard .5s ease-out forwards;
+                animation-delay: 1s;
+                @keyframes appearCard {
+                    from{transform: scale(0);opacity: 0;}
+                    50%{opacity: 1;}
+                    to{transform: scale(1);opacity: 1;}
+                }
+            }
+            &.remove-card {
+                animation: removeCard .5s ease-out forwards;
+                @keyframes removeCard {
+                    from{transform: scale(1);opacity: 1;}
+                    30%{transform: scale(1.2);opacity: 1;}
+                    to{transform: scale(0);opacity: 0;}
+                }
+            }
             .container-circle {
                 height: 100px;
                 width: 300px;   
@@ -79,7 +119,6 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    background: #000;
                     border-radius: 100px;
                     color: #fff;
                     height: 50px;
@@ -90,6 +129,9 @@
                     opacity: 0;
                     transform: scale(0);
                     transition: all 0.25s;
+                    img {
+                        width: 140%;
+                    }
                 }
                 .bar-progress-cont {
                     position: absolute;

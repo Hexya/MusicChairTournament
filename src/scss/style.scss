@@ -6,6 +6,16 @@
 @import 'lastStay';
 @import 'kamehameha';
 
+@font-face {
+  font-family: 'hudosn';
+  src: url('../Font/HUDSON/Hudson\ NY\ Regular.otf');
+}
+@font-face {
+  font-family: 'kensmark';
+  src: url('../Font/kensmark/Kensmark-Bold-Slant/Kensmark-03-Bold.otf');
+}
+
+
 html,
 body {
   margin: 0;

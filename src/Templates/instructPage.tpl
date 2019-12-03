@@ -41,10 +41,10 @@ module.exports = "<div class='instruct-page'>" +
                      "<div class='card player-4'>" +
                         "<p>Press any</br>button to play</p>" +
                         "<div class='touch-pad'>" +
-                           "<div class='touch first-touch'>1</div>" +
+                           "<div class='touch first-touch'>5</div>" +
+                           "<div class='touch'>1</div>" +
                            "<div class='touch'>2</div>" +
                            "<div class='touch'>3</div>" +
-                           "<div class='touch'>5</div>" +
                         "</div>" +
                         "<div class='player-txt'>" +
                            "<p>Joueur 4</p>" +

@@ -3,6 +3,8 @@ let progressBar = require('../Templates/progressBar.tpl');
 let kamehameha = require('../Templates/kamehameha.tpl');
 let lastStay = require('../Templates/lastStay.tpl');
 
+import imgValidate from '../assets/img/Check.svg';
+
 export default class App {
 	constructor(numberGame) {
 		this.choice;
@@ -42,6 +44,24 @@ export default class App {
 
 	uniqueKey() {
 		document.querySelector('.game-container').innerHTML = uniqueKey;
+		for (let i = 0; i < document.querySelectorAll('.validate-icon img').length; i++) {
+			document.querySelectorAll('.validate-icon img')[i].src = imgValidate;
+		}
+
+		//Check player
+		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
+			if (
+				this.winner[0] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
+				this.winner[1] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1]
+			) {
+				console.log(document.querySelectorAll('.player-cont')[i]);
+				document.querySelectorAll('.player-cont')[i].style.display = 'none';
+			} else {
+				document.querySelectorAll('.player-cont')[i].classList.add('winner-' + this.incre);
+				this.incre += 1;
+			}
+		}
+
 		let randomArray = ['haut', 'droite', 'bas', 'gauche'];
 		let rand = Math.floor(Math.random() * randomArray.length);
 
@@ -164,6 +184,9 @@ export default class App {
 	}
 	progressBar() {
 		document.querySelector('.game-container').innerHTML = progressBar;
+		for (let i = 0; i < document.querySelectorAll('.validate-icon img').length; i++) {
+			document.querySelectorAll('.validate-icon img')[i].src = imgValidate;
+		}
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
@@ -226,6 +249,7 @@ export default class App {
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
 
+		//Check player
 		for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
 			if (
 				this.winner[0] != document.querySelectorAll('.player-cont')[i].className.split(' ')[1] &&
@@ -234,7 +258,6 @@ export default class App {
 				console.log(document.querySelectorAll('.player-cont')[i]);
 				document.querySelectorAll('.player-cont')[i].style.display = 'none';
 			} else {
-				//document.querySelectorAll('.player-cont')[i].style.background = 'green';
 				document.querySelectorAll('.player-cont')[i].classList.add('winner-' + this.incre);
 				this.incre += 1;
 			}
@@ -458,14 +481,27 @@ export default class App {
 
 	// Method for remove ui
 	resetGame() {
-		document.querySelector('.game-container').innerHTML = '';
+		//remove element
+		document.querySelector('.instruction').classList.remove('appear-card');
+		setTimeout(() => {
+			document.querySelector('.instruction').classList.add('remove-card');
+			for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
+				document.querySelectorAll('.player-cont')[i].classList.remove('appear-card');
+				setTimeout(() => {
+					document.querySelectorAll('.player-cont')[i].classList.add('remove-card');
+				}, 100)
+			}
+		}, 100)
+		setTimeout(() => {
+			document.querySelector('.game-container').innerHTML = '';
+		}, 700)
 	}
 
 	isFinish(resolve, max) {
 		if (this.winnerArray.length == max) {
 			setTimeout(() => {
 				this.resetGame();
-			}, 2000);
+			}, 3000);
 
 			resolve(this.winnerArray[this.winnerArray.length - 1].charAt(7));
 		}

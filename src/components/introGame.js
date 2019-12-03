@@ -1,4 +1,6 @@
 import imgLogo from '../assets/img/LOGO_MCT.svg';
+import imgInfo from '../assets/img/InfosSvg.svg';
+import imgSound from '../assets/img/SoundSvg.svg';
 
 let logoPage = require('../Templates/logoPage.tpl');
 let instructPage = require('../Templates/instructPage.tpl');
@@ -16,6 +18,8 @@ export default class App {
 	logoPage() {
 		document.querySelector('.home-container').innerHTML = logoPage;
 		document.querySelector('.logo-img').src = imgLogo;
+		document.querySelector('.info-btn img').src = imgInfo;
+		document.querySelector('.sound-btn img').src = imgSound;
 	}
 	beginGame() {
 		return new Promise(resolve => {
@@ -76,13 +80,15 @@ export default class App {
 							}, 200);
 						}, 200);
 						//REMOVE INSTRUCT PAGE
-						setTimeout(() => {
-							document.querySelector('.logo-page').classList.add('remove-back'); //remove back
+						if (document.querySelector('.logo-page')) {
 							setTimeout(() => {
-								//document.querySelector('.logo-page').remove();
-								document.querySelector('.home-container').remove();
-							}, 800);
-						}, 1400);
+								document.querySelector('.logo-page').classList.add('remove-back'); //remove back
+								setTimeout(() => {
+									//document.querySelector('.logo-page').remove();
+									document.querySelector('.home-container').remove();
+								}, 800);
+							}, 1400);
+						}
 					}
 				}, 1000);
 			});
