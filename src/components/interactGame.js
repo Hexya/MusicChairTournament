@@ -171,35 +171,35 @@ export default class App {
 				switch (key) {
 					case 81: //Q P1
 						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 68: //D P1
 						this.incrementProgressBar('player-1');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 75: //K P2
 						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 77: //M P2
 						this.incrementProgressBar('player-2');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 37: //left walk P3
 						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 39: //right turn P3
 						this.incrementProgressBar('player-3');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 49: //1 P4
 						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					case 51: //3 P4
 						this.incrementProgressBar('player-4');
-						this.isFinish(resolve, 3);
+						this.isFinish(resolve, 4);
 						break;
 					default:
 				}
@@ -456,13 +456,17 @@ export default class App {
 		});
 	}
 
+	// Method for remove ui
 	resetGame() {
 		document.querySelector('.game-container').innerHTML = '';
 	}
 
 	isFinish(resolve, max) {
 		if (this.winnerArray.length == max) {
-			this.resetGame();
+			setTimeout(() => {
+				this.resetGame();
+			}, 2000);
+
 			resolve(this.winnerArray[this.winnerArray.length - 1].charAt(7));
 		}
 	}
