@@ -22,7 +22,7 @@ class SceneManager {
 		this.components = [];
 
 		// Interactions controls
-		this.controls = this.buildControls(this.camera, this.renderer);
+		// this.controls = this.buildControls(this.camera, this.renderer);
 
 		this.interaction = new InteractionManager(
 			this.renderer,
