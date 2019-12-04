@@ -12,6 +12,8 @@ import soundBegin from '../audios/gongDebutJEU.mp3';
 import soundEnd from '../audios/gong-finMiniJeu.mp3';
 import soundLooser from '../audios/YouLoose-modif.mp3';
 
+import soundCommentateurStart from '../audios/3-2-1-fight.mp3';
+
 import { Howl, Howler } from 'howler';
 
 export default class App {
@@ -33,17 +35,19 @@ export default class App {
 
 		//SOUND
 		this.gameSound = new Howl({
-			src: [soundGame]
+			src: [soundGame],
 		});
 		this.beginSound = new Howl({
-			src: [soundBegin]
+			src: [soundBegin],
 		});
 		this.endSound = new Howl({
-			src: [soundEnd]
+			src: [soundEnd],
 		});
 		this.gameLooser = new Howl({
-			src: [soundLooser]
+			src: [soundLooser],
 		});
+
+		this.audioFight = new Howl({ src: [soundCommentateurStart] });
 
 		// this.gameArray[numberGame]();
 		//this.randomGame();
@@ -311,7 +315,7 @@ export default class App {
 		for (let i = 0; i < document.querySelectorAll('.player-final').length; i++) {
 			if (
 				this.winnerArray[0] !=
-				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
+					document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
 				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
 				console.log(document.querySelectorAll('.player-cont')[i]);
@@ -574,7 +578,7 @@ export default class App {
 	}
 
 	transitionRound() {
-		console.log('round');
+		this.audioFight.play();
 		document.querySelector('.game-container').innerHTML += transitionTpl;
 	}
 
@@ -586,7 +590,7 @@ export default class App {
 		document.querySelector('.instruction').classList.remove('appear-card');
 		setTimeout(() => {
 			this.endSound.stop();
-		}, 1000)
+		}, 1000);
 
 		//remove element
 		setTimeout(() => {
@@ -606,8 +610,8 @@ export default class App {
 			this.gameLooser.play();
 			setTimeout(() => {
 				this.gameLooser.stop();
-			}, 1800)
-		}, 2000)
+			}, 1800);
+		}, 2000);
 	}
 
 	isFinish(resolve, max) {

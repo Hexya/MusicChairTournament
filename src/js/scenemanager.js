@@ -26,6 +26,10 @@ import Music04 from '../audios/music-04.mp3';
 import Music05 from '../audios/music-05.mp3';
 import Music06 from '../audios/music-06.mp3';
 import Freeze from '../audios/freeze.mp3';
+import FinalRound from '../audios/finalRound.mp3';
+
+import Applause from '../audios/applause.mp3';
+import Chering from '../audios/cheering3.mp3';
 
 class Scene01 extends SceneManager {
 	constructor(canvas) {
@@ -74,9 +78,16 @@ class Scene01 extends SceneManager {
 			src: allMusics[Math.floor(Math.random() * Math.floor(allMusics.length))],
 		});
 
-		this.sound.volume = 0.45;
+		this.sound.volume = 1;
+
+		this.soundFinal = new Howl({ src: [FinalRound] });
 
 		this.soundFreeze = new Howl({ src: [Freeze] });
+
+		this.soundApplause = new Howl({ src: [Applause], loop: true });
+		this.soundApplause.play();
+
+		this.soundChering = new Howl({ src: [Chering] });
 
 		this.game = new interactGame();
 
@@ -91,12 +102,13 @@ class Scene01 extends SceneManager {
 
 				// Start first game
 				this.game.uniqueKey().then(looser => {
-					console.log('hehehe')
+					console.log('hehehe');
 					this.characters.stoppedCharacters();
-					console.log('ahahah')
+					console.log('ahahah');
 
 					setTimeout(() => {
 						this.characters.deleteCharacter(parseInt(looser));
+						this.soundChering.play();
 
 						setTimeout(() => {
 							this.game.transitionRound();
@@ -109,11 +121,8 @@ class Scene01 extends SceneManager {
 							this.sound.play();
 
 							setTimeout(() => {
-								this.sound.volume = 0.75;
 								this.soundFreeze.play();
 								this.sound.pause();
-								// this.offset = this.sound.offset();
-								// console.log(this.sound.duration);
 
 								// Start game two
 								this.game.progressBar().then(looser => {
@@ -121,16 +130,19 @@ class Scene01 extends SceneManager {
 
 									setTimeout(() => {
 										this.characters.deleteCharacter(parseInt(looser));
+										this.soundChering.play();
 
 										setTimeout(() => {
 											this.game.transitionRound();
+											setTimeout(() => {
+												this.soundFinal.play();
+											}, 2500);
 										}, 2500);
 
 										setTimeout(() => {
 											this.chairs.resizeChairs();
 											this.characters.resizeScene();
 											this.characters.startWalking();
-											this.sound.volume = 1.0;
 											this.sound.play();
 
 											setTimeout(() => {
@@ -143,6 +155,8 @@ class Scene01 extends SceneManager {
 
 													setTimeout(() => {
 														this.characters.deleteCharacter(parseInt(looser3));
+														this.soundChering.play();
+
 														setTimeout(() => {
 															this.sound.play();
 														}, 2000);
@@ -174,7 +188,7 @@ class Scene01 extends SceneManager {
 					// this.playSound();
 				}, 2500);
 			}, 2500);
-		}, 2000);
+		}, 2000);*/
 		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
@@ -232,7 +246,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function (buffer) {
+			audioLoader.load(Music, function(buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);
