@@ -68,25 +68,25 @@ class Character extends ComponentManager {
 				character.scene.scale.set(0.185, 0.185, 0.185);
 
 				const uniforms = {
-					u_time: { type: "f", value: 0 },
-					u_Alpha: { type: "f", value: 0.16 },
+					u_time: { type: 'f', value: 0 },
+					u_Alpha: { type: 'f', value: 0.16 },
 					u_resolution: {
-						type: "v2",
+						type: 'v2',
 						value: new THREE.Vector2(this.width, this.height),
 					},
-					u_mouse: { type: "v2", value: new THREE.Vector2(0, 0) },
+					u_mouse: { type: 'v2', value: new THREE.Vector2(0, 0) },
 					u_text0: {
-						type: "t",
+						type: 't',
 						value: new THREE.TextureLoader().load(water),
 					},
 					u_text1: {
-						type: "t",
+						type: 't',
 						value: new THREE.TextureLoader().load(waterGeo),
 					},
 					u_progress: {
-						type: "f",
-						value: 0
-					}
+						type: 'f',
+						value: 0,
+					},
 				};
 				const getMaterial = () => {
 					return new THREE.ShaderMaterial({
@@ -97,7 +97,6 @@ class Character extends ComponentManager {
 						fragmentShader: waterFragment,
 					});
 				};
-
 
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
 				var material = getMaterial();
@@ -199,7 +198,6 @@ class Character extends ComponentManager {
 				this.meshCharacters.add(character.scene);
 				this.characters.push(character);
 				this.meshGates.add(gate);
-
 			});
 
 			this.promiseAllCharacters.push(loadCharacter);
@@ -265,8 +263,6 @@ class Character extends ComponentManager {
 		let gate = this.scene.getObjectByName('Gates').children[currentChair];
 		gate.visible = true;
 
-		console.log(this.scene.getObjectByName('Chairs').children[currentChair].position);
-
 		anime({
 			targets: gate.scale,
 			x: [0.1, 1],
@@ -301,7 +297,7 @@ class Character extends ComponentManager {
 			this.scene
 				.getObjectByName('Gates')
 				.remove(this.scene.getObjectByName('Gate n°' + currentChair.toString()));
-		}, 1500);
+		}, 1000);
 
 		this.options.nbCharacters--;
 	}
@@ -355,12 +351,17 @@ class Character extends ComponentManager {
 			}
 		}
 
-
 		this.waterDeform += 0.01;
 		if (this.scene.getObjectByName('Gates')) {
-			this.scene.getObjectByName('Gates').children[0].material.uniforms.u_time.value = this.waterDeform;
-			this.scene.getObjectByName('Gates').children[1].material.uniforms.u_time.value = this.waterDeform;
-			this.scene.getObjectByName('Gates').children[2].material.uniforms.u_time.value = this.waterDeform;
+			this.scene.getObjectByName(
+				'Gates',
+			).children[0].material.uniforms.u_time.value = this.waterDeform;
+			this.scene.getObjectByName(
+				'Gates',
+			).children[1].material.uniforms.u_time.value = this.waterDeform;
+			this.scene.getObjectByName(
+				'Gates',
+			).children[2].material.uniforms.u_time.value = this.waterDeform;
 		}
 	}
 
