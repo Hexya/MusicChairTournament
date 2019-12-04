@@ -16,10 +16,11 @@
   src: url('../Font/kensmark/Kensmark-Bold-Slant/Kensmark-03-Bold.otf');
 }
 
-
 html,
 body {
   margin: 0;
+
+  overflow: hidden;
 
   canvas {
     position: absolute;

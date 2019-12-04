@@ -16,8 +16,6 @@ import Terrain from '../components/terrain.component';
 import Chairs from '../components/chairs.component';
 import HemisphereLight from '../components/hemisphereLight.component';
 
-
-
 // Sounds
 import Music01 from '../audios/music-01.mp3';
 import Music02 from '../audios/music-02.mp3';
@@ -38,7 +36,7 @@ class Scene01 extends SceneManager {
 		this.camera.position.set(5, 5, 5);
 		this.camera.lookAt(0, 0, 0);
 
-		this.scene.add(Helpers.grid());
+		// this.scene.add(Helpers.grid());
 
 		this.options = {
 			nbCharacters: 4,
@@ -243,7 +241,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function (buffer) {
+			audioLoader.load(Music, function(buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);

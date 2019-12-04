@@ -42,6 +42,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	sceneManager.sceneIsLoaded().then(() => {
 		bindEventListeners();
 		render();
-		document.body.appendChild(stats.dom);
+
+		document.querySelector('.close-button.close-bottom').style.display = 'none';
+		// document.body.appendChild(stats.dom);
 	});
 });

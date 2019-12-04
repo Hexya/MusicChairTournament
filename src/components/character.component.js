@@ -268,7 +268,7 @@ class Character extends ComponentManager {
 		setTimeout(() => {
 			this.scene.getObjectByName('Gate n°' + currentChair.toString()).visible = false;
 			this.options.currentChair = 0;
-		}, 4500);
+		}, 5500);
 
 		this.options.nbCharacters--;
 	}
