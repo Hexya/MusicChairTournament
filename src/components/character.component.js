@@ -5,6 +5,12 @@ import ComponentManager from '../utils/components.manager';
 
 import Body from '../models/body.glb';
 
+import yelo from '../textures/matCap/yelo.png';
+import Orange from '../textures/matCap/perso-orange.png';
+import Blue from '../textures/matCap/perso-blue.png';
+import Green from '../textures/matCap/perso-green.png';
+import Purple from '../textures/matCap/perso-purple.png';
+
 class Character extends ComponentManager {
 	constructor(scene, options) {
 		super(scene);
@@ -28,6 +34,13 @@ class Character extends ComponentManager {
 		this.meshGates = new THREE.Group();
 		this.meshGates.name = 'Gates';
 
+		var loader = new THREE.TextureLoader();
+		this.pink = loader.load(yelo);
+		this.orange = loader.load(Orange);
+		this.blue = loader.load(Blue);
+		this.green = loader.load(Green);
+		this.purple = loader.load(Purple);
+
 		this.createScene(6);
 	}
 
@@ -44,7 +57,7 @@ class Character extends ComponentManager {
 
 				character.scene.position.x = x * this.options.distRadius;
 				character.scene.position.z = z * this.options.distRadius;
-				character.scene.scale.set(0.175, 0.175, 0.175);
+				character.scene.scale.set(0.185, 0.185, 0.185);
 
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
 				var material = new THREE.MeshBasicMaterial({ color: 0x00007d });
@@ -55,19 +68,70 @@ class Character extends ComponentManager {
 				gate.visible = false;
 				gate.name = 'Gate n°' + i;
 
-				/*character.scene.traverse(child => {
-					if (child.material) {
-						// child.material.color = new THREE.Color(Math.random() * 0xffffff);
-						// child.material.emissive = new THREE.Color(Math.random() * 0xffffff);
-						// child.material.wireframe = true;
+				character.scene.traverse(child => {
+					switch (i) {
+						case 0:
+							child.material = new THREE.MeshMatcapMaterial({
+								matcap: this.orange,
+								color: 0xffffff,
+								skinning: true,
+							});
+							break;
+
+						case 1:
+							child.material = new THREE.MeshMatcapMaterial({
+								matcap: this.blue,
+								color: 0xffffff,
+								skinning: true,
+							});
+							break;
+
+						case 2:
+							child.material = new THREE.MeshMatcapMaterial({
+								matcap: this.green,
+								color: 0xffffff,
+								skinning: true,
+							});
+							break;
+
+						case 3:
+							child.material = new THREE.MeshMatcapMaterial({
+								matcap: this.purple,
+								color: 0xffffff,
+								skinning: true,
+							});
+							break;
 					}
 
 					if (child.name == 'bonnet') {
-						child.material.color = new THREE.Color(Math.random() * 0xffffff);
-						child.material.emissive = new THREE.Color(Math.random() * 0xffffff);
-						console.log(child);
+						child.material = new THREE.MeshMatcapMaterial({
+							matcap: this.pink,
+							color: 0xffffff,
+							skinning: true,
+						});
 					}
-				});*/
+
+					if (child.name == 'nez') {
+						child.material = new THREE.MeshPhongMaterial({
+							color: Math.random() * 0xffffff,
+							skinning: true,
+						});
+					}
+
+					if (child.name == 'lunette') {
+						child.material = new THREE.MeshPhongMaterial({
+							color: 0x00ff00,
+							skinning: true,
+						});
+					}
+
+					console.log(child.name);
+				});
+
+				// character.scene.traverse(child => {
+				// 	/*child.material.color = new THREE.Color(Math.random() * 0xffffff);
+				// 	child.material.emissive = new THREE.Color(Math.random() * 0xffffff);*/
+				// });
 
 				console.log(character.scene);
 
@@ -262,7 +326,7 @@ class Character extends ComponentManager {
 			character.position.x = x * this.options.distRadius;
 			character.position.z = z * this.options.distRadius;
 
-			gate.position.z = z * this.options.distRadius * 0.85;
+			gate.position.x = x * this.options.distRadius * 0.85;
 			gate.position.z = z * this.options.distRadius * 0.85;
 
 			character.rotation.y =

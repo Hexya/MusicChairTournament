@@ -268,10 +268,6 @@ export default class App {
 		}
 	}
 
-	progressBarIsReady(value) {
-		return value;
-	}
-
 	//ONLY FOR 2
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
@@ -297,59 +293,69 @@ export default class App {
 		// 'none';
 
 		// Reset array of winner
+		this.winnerArray.pop();
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				console.log('ehhehe');
 				if (document.querySelector('.kamehameha')) {
-					if (
-						document.querySelector('.progress-right').offsetWidth < 30 ||
-						document.querySelector('.progress-right').offsetWidth > 670
-					) {
-						// this.isFinish(resolve, 2);
+					// if (
+					// 	document.querySelector('.progress-right').offsetWidth < 30 ||
+					// 	document.querySelector('.progress-right').offsetWidth > 670
+					// ) {
+					// 	// this.isFinish(resolve, 1);
+					// 	// console.log('FINISH');
+					// }
+
+					// if (document.querySelector('.progress-right').offsetWidth < 30) {
+					// 	console.log('Player right');
+					// }
+
+					// if (document.querySelector('.progress-left').offsetWidth < 670) {
+					// 	console.log('Player left');
+					// }
+
+					let left = document.querySelector('.progress-left').offsetWidth;
+					let right = document.querySelector('.progress-right').offsetWidth;
+					if (left < 30) {
+						// console.log(this.winnerArray);
+						// this.isFinish(resolve, 1);
+
+						this.winnerArray.sort().reverse();
+						this.isFinish(resolve, 2);
+						console.log('Left');
+					}
+
+					if (right < 30) {
+						this.winnerArray.sort();
+						this.isFinish(resolve, 2);
+						console.log('Right');
 					}
 
 					let key = e.keyCode || e.which;
 					switch (key) {
 						case 81: //Q P1
-							console.log('jejejeje');
 							this.progressKamehameha('player-1');
-							this.isFinish(resolve, 2);
 							break;
 						case 68: //D P1
-							console.log('jejejeje');
 							this.progressKamehameha('player-1');
-							this.isFinish(resolve, 2);
 							break;
 						case 75: //K P2
-							console.log('jejejeje');
 							this.progressKamehameha('player-2');
-							this.isFinish(resolve, 2);
 							break;
 						case 77: //M P2
-							console.log('jejejeje');
 							this.progressKamehameha('player-2');
-							this.isFinish(resolve, 2);
 							break;
 						case 37: //left walk P3
-							console.log('jejejeje');
 							this.progressKamehameha('player-3');
-							this.isFinish(resolve, 2);
 							break;
 						case 39: //right turn P3
-							console.log('jejejeje');
 							this.progressKamehameha('player-3');
-							this.isFinish(resolve, 2);
 							break;
 						case 49: //1 P4
-							console.log('jejejeje');
 							this.progressKamehameha('player-4');
-							this.isFinish(resolve, 2);
 							break;
 						case 51: //3 P4
-							console.log('jejejeje');
 							this.progressKamehameha('player-4');
-							this.isFinish(resolve, 2);
 							break;
 						default:
 					}
@@ -560,7 +566,7 @@ export default class App {
 	}
 
 	isFinish(resolve, max) {
-		console.log(this.winnerArray);
+		// console.log(this.winnerArray);
 
 		if (this.winnerArray.length == max) {
 			setTimeout(() => {

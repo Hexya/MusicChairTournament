@@ -5,6 +5,9 @@ import ComponentManager from '../utils/components.manager';
 import Chair from '../models/chaise.glb';
 import { chainFirst } from 'fp-ts/lib/Option';
 
+import yelo from '../textures/matCap/cyan.png';
+import Red from '../textures/matCap/chair.png';
+
 class Chairs extends ComponentManager {
 	constructor(scene, options) {
 		super(scene);
@@ -12,6 +15,9 @@ class Chairs extends ComponentManager {
 		this.options = {
 			...options,
 		};
+
+		var loader = new THREE.TextureLoader();
+		this.red = loader.load(yelo);
 
 		this.createChairs();
 	}
@@ -25,7 +31,7 @@ class Chairs extends ComponentManager {
 			this.generateChair().then(chair => {
 				// Change the material
 				chair.scene.traverse(child => {
-					child.material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+					child.material = new THREE.MeshMatcapMaterial({ matcap: this.red, color: 0xffffff });
 				});
 
 				chair.scene.name = 'Chair n°' + i;

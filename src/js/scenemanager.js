@@ -104,9 +104,11 @@ class Scene01 extends SceneManager {
 
 										// Start game two
 										this.game.kamehameha().then(looser3 => {
-											this.progressBarIsReady(false);
-											console.log(looser3);
 											this.characters.stoppedCharacters();
+
+											setTimeout(() => {
+												this.characters.deleteCharacter(parseInt(looser3));
+											}, 1500);
 										});
 									}, 6000);
 								}, 1500);
@@ -123,7 +125,7 @@ class Scene01 extends SceneManager {
 
 			//GAME 2
 			setTimeout(() => {
-				this.characters.deleteCharacter(1);
+				this.characters.deleteCharacter(0);
 
 				setTimeout(() => {
 					this.chairs.resizeChairs();
@@ -132,14 +134,14 @@ class Scene01 extends SceneManager {
 					// this.playSound();
 				}, 2500);
 			}, 2500);
-		}, 2000);*/
+		}, 2000);
 		/*
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
 			// this.stopSound();
 
 			setTimeout(() => {
-				this.characters.deleteCharacter(2);
+				this.characters.deleteCharacter(1);
 				//GAME FINAL
 				setTimeout(() => {
 					this.chairs.resizeChairs();
@@ -148,8 +150,8 @@ class Scene01 extends SceneManager {
 					// this.playSound();
 				}, 5000);
 			}, 2000);
-		}, 12000);*/
-		/*
+		}, 12000);
+
 		setTimeout(() => {
 			this.characters.stoppedCharacters();
 			this.stopSound();
