@@ -34,6 +34,7 @@ export default class App {
 		this.incre = 1;
 		this.increment = 1;
 		this.lastWinner = false;
+		this.resolveWin = false;
 
 		//SOUND
 		this.gameSound = new Howl({
@@ -355,21 +356,27 @@ export default class App {
 
 					let left = document.querySelector('.progress-left').offsetWidth;
 					let right = document.querySelector('.progress-right').offsetWidth;
-					if (left < 30) {
-						// console.log(this.winnerArray);
-						// this.isFinish(resolve, 1);
+					if (this.resolveWin == false) {
+						if (left < 30) {
+							// console.log(this.winnerArray);
+							// this.isFinish(resolve, 1);
 
-						this.winnerArray.sort().reverse();
-						this.isFinish(resolve, 2);
-						this.lastWinner = true;
-						//console.log('Left');
-					}
+							this.winnerArray.sort().reverse();
+							this.isFinish(resolve, 2);
+							this.lastWinner = true;
+							//console.log('Left');
+							this.resolveWin = true;
 
-					if (right < 30) {
-						this.winnerArray.sort();
-						this.isFinish(resolve, 2);
-						this.lastWinner = true
-						//console.log('Right');
+						}
+
+						if (right < 30) {
+							this.winnerArray.sort();
+							this.isFinish(resolve, 2);
+							this.lastWinner = true;
+							//console.log('Right');
+							this.resolveWin = true;
+
+						}
 					}
 
 					let key = e.keyCode || e.which;
