@@ -78,6 +78,10 @@ class Scene01 extends SceneManager {
 						this.characters.deleteCharacter(parseInt(looser));
 
 						setTimeout(() => {
+							this.game.transitionRound();
+						}, 2500);
+
+						setTimeout(() => {
 							this.chairs.resizeChairs();
 							this.characters.resizeScene();
 							this.characters.startWalking();
@@ -90,6 +94,10 @@ class Scene01 extends SceneManager {
 									this.characters.deleteCharacter(parseInt(looser));
 
 									setTimeout(() => {
+										this.game.transitionRound();
+									}, 2500);
+
+									setTimeout(() => {
 										this.chairs.resizeChairs();
 										this.characters.resizeScene();
 										this.characters.startWalking();
@@ -100,10 +108,10 @@ class Scene01 extends SceneManager {
 											console.log(looser3);
 											this.characters.stoppedCharacters();
 										});
-									}, 2500);
+									}, 6000);
 								}, 1500);
 							});
-						}, 2500);
+						}, 6000);
 					}, 1500);
 				});
 			}, 2500);
@@ -182,7 +190,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function (buffer) {
+			audioLoader.load(Music, function(buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);

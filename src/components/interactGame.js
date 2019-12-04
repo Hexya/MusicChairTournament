@@ -4,7 +4,6 @@ let kamehameha = require('../Templates/kamehameha.tpl');
 let lastStay = require('../Templates/lastStay.tpl');
 let transitionTpl = require('../Templates/transitionTpl.tpl');
 
-
 import imgValidate from '../assets/img/Check.svg';
 import strikeBar from '../assets/img/CursorSvg.svg';
 
@@ -279,13 +278,11 @@ export default class App {
 
 		document.querySelector('.game-container .progress-left img').src = strikeBar;
 
-		this.transitionRound();
-
 		//Check player
 		for (let i = 0; i < document.querySelectorAll('.player-final').length; i++) {
 			if (
 				this.winnerArray[0] !=
-				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
+					document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
 				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
 				console.log(document.querySelectorAll('.player-cont')[i]);
@@ -303,7 +300,7 @@ export default class App {
 
 		return new Promise(resolve => {
 			window.addEventListener('keydown', e => {
-				console.log('ehhehe')
+				console.log('ehhehe');
 				if (document.querySelector('.kamehameha')) {
 					if (
 						document.querySelector('.progress-right').offsetWidth < 30 ||
@@ -315,42 +312,42 @@ export default class App {
 					let key = e.keyCode || e.which;
 					switch (key) {
 						case 81: //Q P1
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-1');
 							this.isFinish(resolve, 2);
 							break;
 						case 68: //D P1
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-1');
 							this.isFinish(resolve, 2);
 							break;
 						case 75: //K P2
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-2');
 							this.isFinish(resolve, 2);
 							break;
 						case 77: //M P2
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-2');
 							this.isFinish(resolve, 2);
 							break;
 						case 37: //left walk P3
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-3');
 							this.isFinish(resolve, 2);
 							break;
 						case 39: //right turn P3
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-3');
 							this.isFinish(resolve, 2);
 							break;
 						case 49: //1 P4
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-4');
 							this.isFinish(resolve, 2);
 							break;
 						case 51: //3 P4
-							console.log('jejejeje')
+							console.log('jejejeje');
 							this.progressKamehameha('player-4');
 							this.isFinish(resolve, 2);
 							break;
