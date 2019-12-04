@@ -33,6 +33,7 @@ export default class App {
 		this.winner = ['player-1', 'player-2', 'player-3', 'player-4'];
 		this.incre = 1;
 		this.increment = 1;
+		this.lastWinner = false;
 
 		//SOUND
 		this.gameSound = new Howl({
@@ -360,19 +361,15 @@ export default class App {
 
 						this.winnerArray.sort().reverse();
 						this.isFinish(resolve, 2);
-						setTimeout(() => {
-							document.querySelector('body').innerHTML += winnerTpl;
-						}, 2000)
-						console.log('Left');
+						this.lastWinner = true;
+						//console.log('Left');
 					}
 
 					if (right < 30) {
 						this.winnerArray.sort();
 						this.isFinish(resolve, 2);
-						setTimeout(() => {
-							document.querySelector('body').innerHTML += winnerTpl;
-						}, 2000)
-						console.log('Right');
+						this.lastWinner = true
+						//console.log('Right');
 					}
 
 					let key = e.keyCode || e.which;
@@ -612,6 +609,9 @@ export default class App {
 
 		setTimeout(() => {
 			document.querySelector('.game-container').innerHTML = '';
+			if (this.lastWinner == true) {
+				document.querySelector('.game-container').innerHTML = winnerTpl;
+			}
 		}, 700);
 		setTimeout(() => {
 			this.gameLooser.play();
