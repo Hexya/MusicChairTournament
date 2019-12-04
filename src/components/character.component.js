@@ -263,13 +263,12 @@ class Character extends ComponentManager {
 				.remove(this.scene.getObjectByName('Character n°' + characterRemoved.toString()));
 
 			this.characters.splice(nbCharacterDeleted, 1);
+		}, 2000);
 
+		setTimeout(() => {
 			this.scene.getObjectByName('Gate n°' + currentChair.toString()).visible = false;
-
-			// for (let i = 0; i < this.scene.getObjectByName('Gates').children.length; i++) {
-			// 	this.scene.getObjectByName('Gate n°' + i.toString()).scale.set(0.01, 0.01, 0.01);
-			// }
-		}, 1000);
+			this.options.currentChair = 0;
+		}, 4500);
 
 		this.options.nbCharacters--;
 	}
