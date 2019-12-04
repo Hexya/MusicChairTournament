@@ -11,6 +11,12 @@ import Blue from '../textures/matCap/perso-blue.png';
 import Green from '../textures/matCap/perso-green.png';
 import Purple from '../textures/matCap/perso-purple.png';
 
+import water from '../textures/water.jpg';
+import waterGeo from '../textures/waterGeo.jpeg';
+
+import waterVertex from '../shader/waterVertex.glsl';
+import waterFragment from '../shader/waterFragment.glsl';
+
 class Character extends ComponentManager {
 	constructor(scene, options) {
 		super(scene);
@@ -21,6 +27,8 @@ class Character extends ComponentManager {
 			stoped: false,
 			currentChair: 0,
 		};
+
+		this.waterDeform = 0;
 
 		this.stepBetweenChair = (2 * Math.PI) / this.options.nbCharacters;
 
@@ -59,8 +67,40 @@ class Character extends ComponentManager {
 				character.scene.position.z = z * this.options.distRadius;
 				character.scene.scale.set(0.185, 0.185, 0.185);
 
+				const uniforms = {
+					u_time: { type: "f", value: 0 },
+					u_Alpha: { type: "f", value: 0.16 },
+					u_resolution: {
+						type: "v2",
+						value: new THREE.Vector2(this.width, this.height),
+					},
+					u_mouse: { type: "v2", value: new THREE.Vector2(0, 0) },
+					u_text0: {
+						type: "t",
+						value: new THREE.TextureLoader().load(water),
+					},
+					u_text1: {
+						type: "t",
+						value: new THREE.TextureLoader().load(waterGeo),
+					},
+					u_progress: {
+						type: "f",
+						value: 0
+					}
+				};
+				const getMaterial = () => {
+					return new THREE.ShaderMaterial({
+						side: THREE.DoubleSide,
+						uniforms: uniforms,
+						transparent: true,
+						vertexShader: waterVertex,
+						fragmentShader: waterFragment,
+					});
+				};
+
+
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
-				var material = new THREE.MeshBasicMaterial({ color: 0x00007d });
+				var material = getMaterial();
 				var gate = new THREE.Mesh(geometryGate, material);
 				gate.position.x = x * this.options.distRadius * 0.85;
 				gate.position.y = 0;
@@ -159,6 +199,7 @@ class Character extends ComponentManager {
 				this.meshCharacters.add(character.scene);
 				this.characters.push(character);
 				this.meshGates.add(gate);
+
 			});
 
 			this.promiseAllCharacters.push(loadCharacter);
@@ -312,6 +353,14 @@ class Character extends ComponentManager {
 					this.options.speed = 1.2;
 				}
 			}
+		}
+
+
+		this.waterDeform += 0.01;
+		if (this.scene.getObjectByName('Gates')) {
+			this.scene.getObjectByName('Gates').children[0].material.uniforms.u_time.value = this.waterDeform;
+			this.scene.getObjectByName('Gates').children[1].material.uniforms.u_time.value = this.waterDeform;
+			this.scene.getObjectByName('Gates').children[2].material.uniforms.u_time.value = this.waterDeform;
 		}
 	}
 
