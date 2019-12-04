@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import OrbitControls from 'orbit-controls-es6';
 import { Interaction } from 'three.interaction';
+import { Howl, Howler } from 'howler';
 
 import SceneManager from '../utils/scene.manager';
 
@@ -18,7 +19,13 @@ import Chairs from '../components/chairs.component';
 import HemisphereLight from '../components/hemisphereLight.component';
 
 // Sounds
-import Music from '../audios/terrain-piscine.mp3';
+import Music01 from '../audios/music-01.mp3';
+import Music02 from '../audios/music-02.mp3';
+import Music03 from '../audios/music-03.mp3';
+import Music04 from '../audios/music-04.mp3';
+import Music05 from '../audios/music-05.mp3';
+import Music06 from '../audios/music-06.mp3';
+import Freeze from '../audios/freeze.mp3';
 
 class Scene01 extends SceneManager {
 	constructor(canvas) {
@@ -53,12 +60,23 @@ class Scene01 extends SceneManager {
 		this.scene.add(Helpers.hemiLight(hemiLight.light(), 2));
 
 		// Sounds
-		this.soundIsReady = false;
+		/*this.soundIsReady = false;
 		this.sound = null;
+		this.offset = 0;
 		this.soundLoaded = this.createSound().then(sound => {
 			this.sound = sound;
 			this.soundIsReady = true;
+		});*/
+
+		let allMusics = [Music01, Music02, Music03, Music04, Music05, Music06];
+
+		this.sound = new Howl({
+			src: allMusics[Math.floor(Math.random() * Math.floor(allMusics.length))],
 		});
+
+		this.sound.volume = 0.45;
+
+		this.soundFreeze = new Howl({ src: [Freeze] });
 
 		this.game = new interactGame();
 
@@ -68,7 +86,8 @@ class Scene01 extends SceneManager {
 
 			setTimeout(() => {
 				//
-				this.sound.stop();
+				this.soundFreeze.play();
+				this.sound.pause();
 
 				// Start first game
 				this.game.uniqueKey().then(looser => {
@@ -87,38 +106,57 @@ class Scene01 extends SceneManager {
 							this.chairs.resizeChairs();
 							this.characters.resizeScene();
 							this.characters.startWalking();
+							this.sound.play();
 
-							// Start game two
-							this.game.progressBar().then(looser => {
-								this.characters.stoppedCharacters();
+							setTimeout(() => {
+								this.sound.volume = 0.75;
+								this.soundFreeze.play();
+								this.sound.pause();
+								// this.offset = this.sound.offset();
+								// console.log(this.sound.duration);
 
-								setTimeout(() => {
-									this.characters.deleteCharacter(parseInt(looser));
+								// Start game two
+								this.game.progressBar().then(looser => {
+									this.characters.stoppedCharacters();
 
 									setTimeout(() => {
-										this.game.transitionRound();
-									}, 2500);
+										this.characters.deleteCharacter(parseInt(looser));
 
-									setTimeout(() => {
-										this.chairs.resizeChairs();
-										this.characters.resizeScene();
-										this.characters.startWalking();
+										setTimeout(() => {
+											this.game.transitionRound();
+										}, 2500);
 
-										// Start game two
-										this.game.kamehameha().then(looser3 => {
-											this.characters.stoppedCharacters();
+										setTimeout(() => {
+											this.chairs.resizeChairs();
+											this.characters.resizeScene();
+											this.characters.startWalking();
+											this.sound.volume = 1.0;
+											this.sound.play();
 
 											setTimeout(() => {
-												this.characters.deleteCharacter(parseInt(looser3));
-											}, 1500);
-										});
-									}, 6000);
-								}, 1500);
-							});
+												this.soundFreeze.play();
+												this.sound.pause();
+
+												// Start game two
+												this.game.kamehameha().then(looser3 => {
+													this.characters.stoppedCharacters();
+
+													setTimeout(() => {
+														this.characters.deleteCharacter(parseInt(looser3));
+														setTimeout(() => {
+															this.sound.play();
+														}, 2000);
+													}, 1500);
+												});
+											}, 20000);
+										}, 6000);
+									}, 2000);
+								});
+							}, 15000);
 						}, 6000);
-					}, 1500);
+					}, 2000);
 				});
-			}, 2500);
+			}, 15000);
 		});
 
 		/*setTimeout(() => {
