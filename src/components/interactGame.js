@@ -7,6 +7,11 @@ let transitionTpl = require('../Templates/transitionTpl.tpl');
 import imgValidate from '../assets/img/Check.svg';
 import strikeBar from '../assets/img/CursorSvg.svg';
 
+import soundGame from '../audios/son-miniJEU.mp3';
+import soundBegin from '../audios/gongDebutJEU.mp3';
+import soundEnd from '../audios/gong-finMiniJeu.mp3';
+import soundLooser from '../audios/YouLoose-modif.mp3';
+
 import { Howl, Howler } from 'howler';
 
 export default class App {
@@ -25,6 +30,20 @@ export default class App {
 		this.winner = ['player-1', 'player-2', 'player-3', 'player-4'];
 		this.incre = 1;
 		this.increment = 1;
+
+		//SOUND
+		this.gameSound = new Howl({
+			src: [soundGame]
+		});
+		this.beginSound = new Howl({
+			src: [soundBegin]
+		});
+		this.endSound = new Howl({
+			src: [soundEnd]
+		});
+		this.gameLooser = new Howl({
+			src: [soundLooser]
+		});
 
 		// this.gameArray[numberGame]();
 		//this.randomGame();
@@ -49,6 +68,10 @@ export default class App {
 
 	uniqueKey() {
 		document.querySelector('.game-container').innerHTML = uniqueKey;
+		//SOUND
+		this.beginSound.play();
+		this.gameSound.play();
+
 		for (let i = 0; i < document.querySelectorAll('.validate-icon img').length; i++) {
 			document.querySelectorAll('.validate-icon img')[i].src = imgValidate;
 		}
@@ -176,28 +199,33 @@ export default class App {
 	}
 
 	incrementProgressBar(player) {
-		if (
-			document.querySelector('.' + player + ' .bar-progress-2').offsetWidth <
-			document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth
-		) {
-			document.querySelector('.' + player + ' .bar-progress-2').style.width =
-				document.querySelector('.' + player + ' .bar-progress-2').offsetWidth + 20 + 'px';
-		} else {
-			document.querySelector('.' + player + '').classList.add('complete');
+		if (document.querySelector('.progress-bar .' + player + '')) {
+			if (
+				document.querySelector('.' + player + ' .bar-progress-2').offsetWidth <
+				document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth
+			) {
+				document.querySelector('.' + player + ' .bar-progress-2').style.width =
+					document.querySelector('.' + player + ' .bar-progress-2').offsetWidth + 20 + 'px';
+			} else {
+				document.querySelector('.' + player + '').classList.add('complete');
 
-			console.log(document.querySelector('.' + player + ' .bar-progress-2').offsetWidth);
-			console.log(document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth);
+				console.log(document.querySelector('.' + player + ' .bar-progress-2').offsetWidth);
+				console.log(document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth);
 
-			if (this.winnerArray.indexOf(player) == -1) {
-				this.winnerArray.push(player);
+				if (this.winnerArray.indexOf(player) == -1) {
+					this.winnerArray.push(player);
+				}
 			}
 		}
 	}
 
 	progressBar() {
 		// document.querySelector('.players-container').parentNode.remove();
-
 		document.querySelector('.game-container').innerHTML = progressBar;
+		//SOUND
+		this.beginSound.play();
+		this.gameSound.play();
+
 		for (let i = 0; i < document.querySelectorAll('.validate-icon img').length; i++) {
 			document.querySelectorAll('.validate-icon img')[i].src = imgValidate;
 		}
@@ -254,17 +282,19 @@ export default class App {
 	}
 
 	progressKamehameha(player) {
-		if (document.querySelector('.' + player + '').classList.contains('winner-1')) {
-			document.querySelector('.progress-left').style.width =
-				document.querySelector('.progress-left').offsetWidth + 40 + 'px';
-			document.querySelector('.progress-right').style.width =
-				document.querySelector('.progress-right').offsetWidth - 40 + 'px';
-		}
-		if (document.querySelector('.' + player + '').classList.contains('winner-2')) {
-			document.querySelector('.progress-left').style.width =
-				document.querySelector('.progress-left').offsetWidth - 40 + 'px';
-			document.querySelector('.progress-right').style.width =
-				document.querySelector('.progress-right').offsetWidth + 40 + 'px';
+		if (document.querySelector('.bar-evo .' + player + '')) {
+			if (document.querySelector('.' + player + '').classList.contains('winner-1')) {
+				document.querySelector('.progress-left').style.width =
+					document.querySelector('.progress-left').offsetWidth + 40 + 'px';
+				document.querySelector('.progress-right').style.width =
+					document.querySelector('.progress-right').offsetWidth - 40 + 'px';
+			}
+			if (document.querySelector('.' + player + '').classList.contains('winner-2')) {
+				document.querySelector('.progress-left').style.width =
+					document.querySelector('.progress-left').offsetWidth - 40 + 'px';
+				document.querySelector('.progress-right').style.width =
+					document.querySelector('.progress-right').offsetWidth + 40 + 'px';
+			}
 		}
 	}
 
@@ -275,6 +305,9 @@ export default class App {
 	//ONLY FOR 2
 	kamehameha() {
 		document.querySelector('.game-container').innerHTML = kamehameha;
+		//SOUND
+		this.beginSound.play();
+		this.gameSound.play();
 
 		document.querySelector('.game-container .progress-left img').src = strikeBar;
 
@@ -282,7 +315,7 @@ export default class App {
 		for (let i = 0; i < document.querySelectorAll('.player-final').length; i++) {
 			if (
 				this.winnerArray[0] !=
-					document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
+				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
 				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
 				console.log(document.querySelectorAll('.player-cont')[i]);
@@ -541,9 +574,15 @@ export default class App {
 
 	// Method for remove ui
 	resetGame() {
-		//remove element
+		//SOUND
+		this.gameSound.stop();
+		this.endSound.play();
 		document.querySelector('.instruction').classList.remove('appear-card');
+		setTimeout(() => {
+			this.endSound.stop();
+		}, 1000)
 
+		//remove element
 		setTimeout(() => {
 			document.querySelector('.instruction').classList.add('remove-card');
 			for (let i = 0; i < document.querySelectorAll('.player-cont').length; i++) {
@@ -557,6 +596,12 @@ export default class App {
 		setTimeout(() => {
 			document.querySelector('.game-container').innerHTML = '';
 		}, 700);
+		setTimeout(() => {
+			this.gameLooser.play();
+			setTimeout(() => {
+				this.gameLooser.stop();
+			}, 1800)
+		}, 2000)
 	}
 
 	isFinish(resolve, max) {

@@ -72,7 +72,9 @@ class Scene01 extends SceneManager {
 
 				// Start first game
 				this.game.uniqueKey().then(looser => {
+					console.log('hehehe')
 					this.characters.stoppedCharacters();
+					console.log('ahahah')
 
 					setTimeout(() => {
 						this.characters.deleteCharacter(parseInt(looser));
@@ -190,7 +192,7 @@ class Scene01 extends SceneManager {
 		var audioLoader = new THREE.AudioLoader();
 
 		return new Promise(resolve => {
-			audioLoader.load(Music, function(buffer) {
+			audioLoader.load(Music, function (buffer) {
 				sound.setBuffer(buffer);
 				// sound.setLoop(true);
 				// sound.setVolume(0.5);

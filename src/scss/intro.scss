@@ -131,6 +131,8 @@ html, body {
             margin-top: 7vh;
             cursor: pointer;
             margin-right: 20px;
+            font-family: 'hudson';
+            font-size: 1.1em;
             &:before {
                 content: '';
                 position: absolute;
@@ -207,6 +209,7 @@ html, body {
             transition: all .5s;
             position: relative;
             overflow: hidden;
+            font-family: 'hudson';
             &.appear-card {
                 animation: appearCard 1s ease-out forwards;
                 @keyframes appearCard {
@@ -247,12 +250,14 @@ html, body {
                 color: #BCBCBC;
                 text-align: center;
                 z-index: 1;
+                margin-top: 50px;
                 p {
                     margin-bottom: 0px;
+                    font-size: 1.1em;
                 }
                 .ready-txt {
                     margin-top: 2px;
-                    font-size: 30px;
+                    font-size: 3em;
                 }
             }
             &.ready-player {
