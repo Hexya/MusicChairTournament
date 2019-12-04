@@ -5,7 +5,6 @@ import ComponentManager from '../utils/components.manager';
 import TerrainGltf from '../models/terrains/WaterPools.glb';
 import AileronsGltf from '../models/terrains/sharky.glb';
 
-
 import pink from '../textures/matCap/pink.png';
 import lightPink from '../textures/matCap/lightPink.png';
 import cyan from '../textures/matCap/cyan.png';
@@ -18,7 +17,6 @@ import { since } from 'most';
 
 import waterVertex from '../shader/waterVertex.glsl';
 import waterFragment from '../shader/waterFragment.glsl';
-
 
 class Terrain extends ComponentManager {
 	constructor(scene) {
@@ -36,7 +34,6 @@ class Terrain extends ComponentManager {
 		this.yellow = loader.load(yellow);
 		this.yel = loader.load(boue);
 
-
 		this.background = loader.load(sky);
 		scene.background = this.background;
 	}
@@ -47,25 +44,40 @@ class Terrain extends ComponentManager {
 			obj.scene.scale.set(1.75, 1.75, 1.75);
 			obj.scene.position.y = -0.25;
 
-			obj.scene.traverse((child) => {
+			obj.scene.traverse(child => {
 				child.material = new THREE.MeshMatcapMaterial({ matcap: this.pink, color: 0xffffff });
-				if (child.name == "bouées" || child.name == "bouées001") { //boué
+				if (child.name == 'bouées' || child.name == 'bouées001') {
+					//boué
 					child.material = new THREE.MeshPhongMaterial({ map: this.yel });
 				}
-				if (child.name == "barrièresGRADINS") { // barriere
+				if (child.name == 'barrièresGRADINS') {
+					// barriere
 				}
-				if (child.name == "barrièresPoteauxGRADINS") { // pillone
+				if (child.name == 'barrièresPoteauxGRADINS') {
+					// pillone
 				}
-				if (child.name == "ChaisesGradins_parties_non_assises" || child.name == "ChaisesGradins_parties_non_assises_0" || child.name == "ChaisesGradins_parties_non_assises_1" || child.name == "ChaisesGradins_parties_non_assises_2") { // chaise
+				if (
+					child.name == 'ChaisesGradins_parties_non_assises' ||
+					child.name == 'ChaisesGradins_parties_non_assises_0' ||
+					child.name == 'ChaisesGradins_parties_non_assises_1' ||
+					child.name == 'ChaisesGradins_parties_non_assises_2'
+				) {
+					// chaise
 					child.material = new THREE.MeshMatcapMaterial({ matcap: this.pink, color: 0xffffff });
 				}
-				if (child.name == "gradins" || child.name == "gradins001") { // gradins
+				if (child.name == 'gradins' || child.name == 'gradins001') {
+					// gradins
 					child.material = new THREE.MeshMatcapMaterial({ matcap: this.cyan, color: 0xffffff });
 				}
-				if (child.name == "terrain_centralebouée") { // plateau
-					child.material = new THREE.MeshMatcapMaterial({ matcap: this.lightPink, color: 0xffffff });
+				if (child.name == 'terrain_centralebouée') {
+					// plateau
+					child.material = new THREE.MeshMatcapMaterial({
+						matcap: this.lightPink,
+						color: 0xffffff,
+					});
 				}
-				if (child.name == "terrain_") { // plane
+				if (child.name == 'terrain_') {
+					// plane
 					child.material = new THREE.MeshMatcapMaterial({ matcap: this.yellow, color: 0xffffff });
 				}
 			});
@@ -79,8 +91,8 @@ class Terrain extends ComponentManager {
 
 			obj.scene.position.y = -0.5;
 
-			obj.scene.traverse((child) => {
-				child.material = new THREE.MeshPhongMaterial({ color: 0x1A1F2E });
+			obj.scene.traverse(child => {
+				child.material = new THREE.MeshPhongMaterial({ color: 0x1a1f2e });
 			});
 
 			this.ailerons = obj.scene.children[0];
@@ -89,25 +101,25 @@ class Terrain extends ComponentManager {
 		});
 
 		const uniforms = {
-			u_time: { type: "f", value: 0 },
-			u_Alpha: { type: "f", value: 0.16 },
+			u_time: { type: 'f', value: 0 },
+			u_Alpha: { type: 'f', value: 0.16 },
 			u_resolution: {
-				type: "v2",
+				type: 'v2',
 				value: new THREE.Vector2(this.width, this.height),
 			},
-			u_mouse: { type: "v2", value: new THREE.Vector2(0, 0) },
+			u_mouse: { type: 'v2', value: new THREE.Vector2(0, 0) },
 			u_text0: {
-				type: "t",
+				type: 't',
 				value: new THREE.TextureLoader().load(water),
 			},
 			u_text1: {
-				type: "t",
+				type: 't',
 				value: new THREE.TextureLoader().load(waterGeo),
 			},
 			u_progress: {
-				type: "f",
-				value: 0
-			}
+				type: 'f',
+				value: 0,
+			},
 		};
 		const getMaterial = () => {
 			return new THREE.ShaderMaterial({
@@ -118,7 +130,6 @@ class Terrain extends ComponentManager {
 				fragmentShader: waterFragment,
 			});
 		};
-
 
 		var geometry = new THREE.CylinderGeometry(9, 9, 0.5, 32);
 		//var material = new THREE.MeshBasicMaterial({ color: 0x14ceff });
@@ -163,7 +174,7 @@ class Terrain extends ComponentManager {
 
 	addGUI(gui) {
 		/*let folder = gui.addFolder('tttzfz');
-	
+
 		folder.add(this.mesh.position, 'x', -10, 10);
 		folder.add(this.mesh.position, 'y', -10, 10);
 		folder.add(this.mesh.position, 'z', -10, 10);*/
