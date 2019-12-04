@@ -42,7 +42,7 @@ class Box extends ComponentManager {
 	}
 
 	click(event) {
-		console.log('Cube touched !');
+		//console.log('Cube touched !');
 	}
 
 	addGUI(gui) {

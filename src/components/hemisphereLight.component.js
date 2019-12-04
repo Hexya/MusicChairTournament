@@ -21,14 +21,14 @@ class HemisphereLightComponent extends ComponentManager {
 		return light;
 	}
 
-	add() {}
+	add() { }
 
 	update(time) {
 		// this.mesh.position.y = Math.sin(time) * 2;
 	}
 
 	click(event) {
-		console.log('Cube touched !');
+		//console.log('Cube touched !');
 	}
 
 	addGUI(gui) {

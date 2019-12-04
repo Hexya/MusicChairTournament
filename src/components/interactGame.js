@@ -3,6 +3,7 @@ let progressBar = require('../Templates/progressBar.tpl');
 let kamehameha = require('../Templates/kamehameha.tpl');
 let lastStay = require('../Templates/lastStay.tpl');
 let transitionTpl = require('../Templates/transitionTpl.tpl');
+let winnerTpl = require('../Templates/winnerTpl.tpl');
 
 import imgValidate from '../assets/img/Check.svg';
 import strikeBar from '../assets/img/CursorSvg.svg';
@@ -209,8 +210,8 @@ export default class App {
 			} else {
 				document.querySelector('.' + player + '').classList.add('complete');
 
-				console.log(document.querySelector('.' + player + ' .bar-progress-2').offsetWidth);
-				console.log(document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth);
+				//console.log(document.querySelector('.' + player + ' .bar-progress-2').offsetWidth);
+				//console.log(document.querySelector('.' + player + ' .bar-progress-cont-2').offsetWidth);
 
 				if (this.winnerArray.indexOf(player) == -1) {
 					this.winnerArray.push(player);
@@ -314,7 +315,7 @@ export default class App {
 				document.querySelectorAll('.player-final')[i].className.split(' ')[1] &&
 				this.winnerArray[1] != document.querySelectorAll('.player-final')[i].className.split(' ')[1]
 			) {
-				console.log(document.querySelectorAll('.player-cont')[i]);
+				//console.log(document.querySelectorAll('.player-cont')[i]);
 				document.querySelectorAll('.player-final')[i].style.display = 'none';
 			} else {
 				document.querySelectorAll('.player-final')[i].classList.add('winner-' + this.increment);
@@ -355,12 +356,14 @@ export default class App {
 
 						this.winnerArray.sort().reverse();
 						this.isFinish(resolve, 2);
+						document.querySelector('body').innerHTML += winnerTpl;
 						console.log('Left');
 					}
 
 					if (right < 30) {
 						this.winnerArray.sort();
 						this.isFinish(resolve, 2);
+						document.querySelector('body').innerHTML += winnerTpl;
 						console.log('Right');
 					}
 
@@ -401,7 +404,7 @@ export default class App {
 	//ONLY FOR 3 MAX
 	lastStay() {
 		document.querySelector('.game-container').innerHTML = lastStay;
-		console.log('lastStay');
+		//console.log('lastStay');
 
 		let randomArray = ['haut', 'droite', 'bas', 'gauche'];
 		let rand = Math.floor(Math.random() * randomArray.length);
@@ -497,73 +500,73 @@ export default class App {
 						case 'haut':
 							if (keyCode == 90) {
 								//Z
-								console.log('player 1 loose');
+								//console.log('player 1 loose');
 							}
 							if (keyCode == 79) {
 								//O
-								console.log('player 2 loose');
+								//console.log('player 2 loose');
 							}
 							if (keyCode == 38) {
 								//^
-								console.log('player 3 loose');
+								//console.log('player 3 loose');
 							}
 							if (keyCode == 53) {
 								//5
-								console.log('player 4 loose');
+								//console.log('player 4 loose');
 							}
 							break;
 						case 'droite':
 							if (keyCode == 68) {
 								//D
-								console.log('player 1 loose');
+								//console.log('player 1 loose');
 							}
 							if (keyCode == 77) {
 								//M
-								console.log('player 2 loose');
+								//console.log('player 2 loose');
 							}
 							if (keyCode == 39) {
 								//>
-								console.log('player 3 loose');
+								//console.log('player 3 loose');
 							}
 							if (keyCode == 51) {
 								//3
-								console.log('player 4 loose');
+								//console.log('player 4 loose');
 							}
 							break;
 						case 'bas':
 							if (keyCode == 83) {
 								//S
-								console.log('player 1 loose');
+								//console.log('player 1 loose');
 							}
 							if (keyCode == 76) {
 								//L
-								console.log('player 2 loose');
+								//console.log('player 2 loose');
 							}
 							if (keyCode == 40) {
 								//v
-								console.log('player 3 loose');
+								//console.log('player 3 loose');
 							}
 							if (keyCode == 50) {
 								//2
-								console.log('player 4 loose');
+								//console.log('player 4 loose');
 							}
 							break;
 						case 'gauche':
 							if (keyCode == 81) {
 								//Q
-								console.log('player 1 loose');
+								//console.log('player 1 loose');
 							}
 							if (keyCode == 75) {
 								//K
-								console.log('player 2 loose');
+								//console.log('player 2 loose');
 							}
 							if (keyCode == 37) {
 								//<
-								console.log('player 3 loose');
+								//console.log('player 3 loose');
 							}
 							if (keyCode == 49) {
 								//1
-								console.log('player 4 loose');
+								//console.log('player 4 loose');
 							}
 							break;
 						default:
@@ -574,7 +577,7 @@ export default class App {
 	}
 
 	transitionRound() {
-		console.log('round');
+		//console.log('round');
 		document.querySelector('.game-container').innerHTML += transitionTpl;
 	}
 

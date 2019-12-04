@@ -10,12 +10,7 @@ import Orange from '../textures/matCap/perso-orange.png';
 import Blue from '../textures/matCap/perso-blue.png';
 import Green from '../textures/matCap/perso-green.png';
 import Purple from '../textures/matCap/perso-purple.png';
-
-import water from '../textures/water.jpg';
-import waterGeo from '../textures/waterGeo.jpeg';
-
-import waterVertex from '../shader/waterVertex.glsl';
-import waterFragment from '../shader/waterFragment.glsl';
+import darkBlue from '../textures/matCap/dark-blue.png';
 
 class Character extends ComponentManager {
 	constructor(scene, options) {
@@ -27,8 +22,6 @@ class Character extends ComponentManager {
 			stoped: false,
 			currentChair: 0,
 		};
-
-		this.waterDeform = 0;
 
 		this.stepBetweenChair = (2 * Math.PI) / this.options.nbCharacters;
 
@@ -48,6 +41,7 @@ class Character extends ComponentManager {
 		this.blue = loader.load(Blue);
 		this.green = loader.load(Green);
 		this.purple = loader.load(Purple);
+		this.darkBlue = loader.load(darkBlue);
 
 		this.createScene(6);
 	}
@@ -67,40 +61,13 @@ class Character extends ComponentManager {
 				character.scene.position.z = z * this.options.distRadius;
 				character.scene.scale.set(0.185, 0.185, 0.185);
 
-				const uniforms = {
-					u_time: { type: "f", value: 0 },
-					u_Alpha: { type: "f", value: 0.16 },
-					u_resolution: {
-						type: "v2",
-						value: new THREE.Vector2(this.width, this.height),
-					},
-					u_mouse: { type: "v2", value: new THREE.Vector2(0, 0) },
-					u_text0: {
-						type: "t",
-						value: new THREE.TextureLoader().load(water),
-					},
-					u_text1: {
-						type: "t",
-						value: new THREE.TextureLoader().load(waterGeo),
-					},
-					u_progress: {
-						type: "f",
-						value: 0
-					}
-				};
-				const getMaterial = () => {
-					return new THREE.ShaderMaterial({
-						side: THREE.DoubleSide,
-						uniforms: uniforms,
-						transparent: true,
-						vertexShader: waterVertex,
-						fragmentShader: waterFragment,
-					});
-				};
-
-
 				var geometryGate = new THREE.CylinderGeometry(0.75, 0.75, 0.1, 32);
-				var material = getMaterial();
+				var material = new THREE.MeshStandardMaterial({
+					side: THREE.DoubleSide,
+					color: 0xffffff,
+				});
+				var trouMat = new THREE.TextureLoader().load(darkBlue);
+				material.map = trouMat;
 				var gate = new THREE.Mesh(geometryGate, material);
 				gate.position.x = x * this.options.distRadius * 0.85;
 				gate.position.y = 0;
@@ -165,7 +132,7 @@ class Character extends ComponentManager {
 						});
 					}
 
-					console.log(child.name);
+					//console.log(child.name);
 				});
 
 				// character.scene.traverse(child => {
@@ -173,7 +140,7 @@ class Character extends ComponentManager {
 				// 	child.material.emissive = new THREE.Color(Math.random() * 0xffffff);*/
 				// });
 
-				console.log(character.scene);
+				//console.log(character.scene);
 
 				character.scene.rotation.y =
 					(this.options.side == 1 ? -Math.PI : Math.PI) / 2 +
@@ -199,7 +166,6 @@ class Character extends ComponentManager {
 				this.meshCharacters.add(character.scene);
 				this.characters.push(character);
 				this.meshGates.add(gate);
-
 			});
 
 			this.promiseAllCharacters.push(loadCharacter);
@@ -265,7 +231,7 @@ class Character extends ComponentManager {
 		let gate = this.scene.getObjectByName('Gates').children[currentChair];
 		gate.visible = true;
 
-		console.log(this.scene.getObjectByName('Chairs').children[currentChair].position);
+		//console.log(this.scene.getObjectByName('Chairs').children[currentChair].position);
 
 		anime({
 			targets: gate.scale,
@@ -354,14 +320,6 @@ class Character extends ComponentManager {
 				}
 			}
 		}
-
-
-		this.waterDeform += 0.01;
-		if (this.scene.getObjectByName('Gates')) {
-			this.scene.getObjectByName('Gates').children[0].material.uniforms.u_time.value = this.waterDeform;
-			this.scene.getObjectByName('Gates').children[1].material.uniforms.u_time.value = this.waterDeform;
-			this.scene.getObjectByName('Gates').children[2].material.uniforms.u_time.value = this.waterDeform;
-		}
 	}
 
 	resizeScene() {
@@ -401,7 +359,7 @@ class Character extends ComponentManager {
 	}
 
 	click(event) {
-		console.log(this.scene.children);
+		//console.log(this.scene.children);
 	}
 
 	addGUI(gui) {

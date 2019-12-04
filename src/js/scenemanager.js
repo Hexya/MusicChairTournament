@@ -8,8 +8,6 @@ import SceneManager from '../utils/scene.manager';
 import introGame from '../components/introGame.js';
 import interactGame from '../components/interactGame.js';
 
-const vertexShader = require('../shader/waterFragment.glsl');
-
 import Helpers from '../utils/helpers.three';
 
 // Components
@@ -17,6 +15,8 @@ import Character from '../components/character.component';
 import Terrain from '../components/terrain.component';
 import Chairs from '../components/chairs.component';
 import HemisphereLight from '../components/hemisphereLight.component';
+
+
 
 // Sounds
 import Music01 from '../audios/music-01.mp3';
@@ -91,9 +91,7 @@ class Scene01 extends SceneManager {
 
 				// Start first game
 				this.game.uniqueKey().then(looser => {
-					console.log('hehehe')
 					this.characters.stoppedCharacters();
-					console.log('ahahah')
 
 					setTimeout(() => {
 						this.characters.deleteCharacter(parseInt(looser));
@@ -140,7 +138,6 @@ class Scene01 extends SceneManager {
 												// Start game two
 												this.game.kamehameha().then(looser3 => {
 													this.characters.stoppedCharacters();
-
 													setTimeout(() => {
 														this.characters.deleteCharacter(parseInt(looser3));
 														setTimeout(() => {
